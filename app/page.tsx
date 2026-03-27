@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import {
   ArrowRight,
   Blocks,
@@ -13,122 +12,12 @@ import {
   Globe,
   Rocket,
   CheckCircle2,
-  ChevronDown,
-  Menu,
-  X,
   Eye,
   ShieldCheck,
   Code2,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-
-// ── Nav ──────────────────────────────────────────────────────────────────────
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center">
-            <Layers className="w-4 h-4 text-background" />
-          </div>
-          <span className="text-sm font-semibold text-foreground tracking-tight">
-            WebCraft
-          </span>
-        </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
-          <a
-            href="#features"
-            className="hover:text-foreground transition-colors"
-          >
-            Features
-          </a>
-          <a
-            href="#how-it-works"
-            className="hover:text-foreground transition-colors"
-          >
-            How it works
-          </a>
-          <a
-            href="#pricing"
-            className="hover:text-foreground transition-colors"
-          >
-            Pricing
-          </a>
-          <Link
-            href="/dashboard/pages"
-            className="hover:text-foreground transition-colors"
-          >
-            Pages
-          </Link>
-        </nav>
-
-        <div className="hidden md:flex items-center gap-2">
-          <ThemeToggle />
-          <Link
-            href="/sign-in"
-            className="h-8 px-4 text-xs font-medium rounded-lg border border-border hover:bg-accent/60 transition-colors text-foreground flex items-center"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/dashboard"
-            className="h-8 px-4 text-xs font-medium rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity flex items-center gap-1.5"
-          >
-            Get started free
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-
-        {/* Mobile menu toggle */}
-        <button
-          className="md:hidden p-2 rounded-lg hover:bg-accent/60 transition-colors"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden border-t border-border bg-background px-6 py-4 space-y-3">
-          {[
-            { href: "#features", label: "Features" },
-            { href: "#how-it-works", label: "How it works" },
-            { href: "#pricing", label: "Pricing" },
-            { href: "/dashboard/pages", label: "Pages" },
-          ].map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              className="block text-sm text-muted-foreground hover:text-foreground"
-              onClick={() => setOpen(false)}
-            >
-              {label}
-            </a>
-          ))}
-          <div className="pt-2 flex flex-col gap-2">
-            <Link
-              href="/sign-in"
-              className="text-sm font-medium text-center py-2 border border-border rounded-lg hover:bg-accent/60 transition-colors"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/dashboard"
-              className="text-sm font-medium text-center py-2 bg-foreground text-background rounded-lg hover:opacity-90 transition-opacity"
-            >
-              Get started free
-            </Link>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-}
+import { SiteNav } from "@/components/site/SiteNav";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const features = [
@@ -277,7 +166,7 @@ const testimonials = [
 export default function Home() {
   return (
     <div className="flex flex-col min-h-full">
-      <Navbar />
+      <SiteNav />
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden border-b border-border">
