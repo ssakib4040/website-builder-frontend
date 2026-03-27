@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Layers, Mail, CheckCircle } from "lucide-react";
+import { Mail, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SiteNav } from "@/components/site/SiteNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function VerifyEmailPage() {
@@ -29,17 +30,7 @@ export default function VerifyEmailPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <header className="h-14 border-b border-border flex items-center px-6 justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center">
-            <Layers className="w-4 h-4 text-background" />
-          </div>
-          <span className="text-base font-semibold text-foreground">
-            WebCraft
-          </span>
-        </Link>
-        <ThemeToggle />
-      </header>
+      <SiteNav />
 
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm text-center space-y-6">
