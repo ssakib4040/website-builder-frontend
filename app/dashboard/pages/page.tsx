@@ -288,6 +288,18 @@ export default function PagesPage() {
                           </Link>
                         </Button>
 
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-7 text-xs gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          asChild
+                        >
+                          <Link href={page.route} target="_blank">
+                            <Globe className="w-3 h-3" />
+                            Visit
+                          </Link>
+                        </Button>
+
                         {!page.isSystem && (
                           <button
                             className="p-1.5 rounded-md text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors opacity-0 group-hover:opacity-100"

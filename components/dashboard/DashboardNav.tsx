@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import {
   FileText,
   Database,
@@ -21,6 +22,8 @@ import {
   ArchiveRestore,
   Activity,
   Settings,
+  Menu,
+  X,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -99,113 +102,74 @@ function SectionLabel({ label }: { label: string }) {
   );
 }
 
-export function DashboardNav() {
-  const pathname = usePathname();
-
-  const isActive = (href: string) =>
-    href === "/dashboard"
-      ? pathname === "/dashboard"
-      : pathname.startsWith(href);
-
+function NavContents({
+  isActive,
+  onNavigate,
+}: {
+  isActive: (href: string) => boolean;
+  onNavigate?: () => void;
+}) {
   return (
-    <div className="w-64 border-r border-border bg-background flex flex-col shrink-0">
+    <>
       {/* ── Brand ── */}
-      <div className="px-4 py-4 border-b border-border">
+      <div className="px-4 py-4 border-b border-border shrink-0">
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center shrink-0">
             <Layers className="w-4 h-4 text-background" />
           </div>
           <div className="leading-none">
-            <p className="text-sm font-semibold text-foreground tracking-tight">
-              WebCraft
-            </p>
-            <p className="text-[10px] text-muted-foreground mt-0.5">
-              No-code builder
-            </p>
+            <p className="text-sm font-semibold text-foreground tracking-tight">WebCraft</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">No-code builder</p>
           </div>
         </Link>
       </div>
 
       {/* ── Navigation ── */}
-      <nav className="flex-1 px-2 py-4 space-y-4 overflow-y-auto">
+      <nav className="flex-1 px-2 py-4 space-y-4 overflow-y-auto" onClick={onNavigate}>
         <div>
           <SectionLabel label="General" />
           <div className="space-y-0.5">
             {mainItems.map(({ href, icon, label }) => (
-              <NavItem
-                key={href}
-                href={href}
-                icon={icon}
-                label={label}
-                isActive={isActive(href)}
-              />
+              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
             ))}
           </div>
         </div>
-
         <div>
           <SectionLabel label="Build" />
           <div className="space-y-0.5">
             {buildItems.map(({ href, icon, label }) => (
-              <NavItem
-                key={href}
-                href={href}
-                icon={icon}
-                label={label}
-                isActive={isActive(href)}
-              />
+              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
             ))}
           </div>
         </div>
-
         <div>
           <SectionLabel label="Deploy" />
           <div className="space-y-0.5">
             {deployItems.map(({ href, icon, label }) => (
-              <NavItem
-                key={href}
-                href={href}
-                icon={icon}
-                label={label}
-                isActive={isActive(href)}
-              />
+              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
             ))}
           </div>
         </div>
-
         <div>
           <SectionLabel label="Users" />
           <div className="space-y-0.5">
             {usersItems.map(({ href, icon, label }) => (
-              <NavItem
-                key={href}
-                href={href}
-                icon={icon}
-                label={label}
-                isActive={isActive(href)}
-              />
+              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
             ))}
           </div>
         </div>
-
         <div>
           <SectionLabel label="Project" />
           <div className="space-y-0.5">
             {projectItems.map(({ href, icon, label }) => (
-              <NavItem
-                key={href}
-                href={href}
-                icon={icon}
-                label={label}
-                isActive={isActive(href)}
-              />
+              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
             ))}
           </div>
         </div>
       </nav>
 
       {/* ── Footer ── */}
-      <div className="px-3 py-3 border-t border-border space-y-1">
+      <div className="px-3 py-3 border-t border-border space-y-1 shrink-0">
         <Link
           href="/builder"
           className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all duration-150 group"
@@ -218,6 +182,79 @@ export function DashboardNav() {
           <ThemeToggle />
         </div>
       </div>
-    </div>
+    </>
+  );
+}
+
+export function DashboardNav() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  // Close drawer on route change
+  useEffect(() => { setOpen(false); }, [pathname]);
+
+  // Prevent body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const isActive = (href: string) =>
+    href === "/dashboard"
+      ? pathname === "/dashboard"
+      : pathname.startsWith(href);
+
+  return (
+    <>
+      {/* ── Desktop sidebar ── */}
+      <div className="hidden lg:flex w-64 border-r border-border bg-background flex-col shrink-0">
+        <NavContents isActive={isActive} />
+      </div>
+
+      {/* ── Mobile top bar ── */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 h-12 border-b border-border bg-background flex items-center justify-between px-4">
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="w-6 h-6 rounded-md bg-foreground flex items-center justify-center shrink-0">
+            <Layers className="w-3.5 h-3.5 text-background" />
+          </div>
+          <span className="text-sm font-semibold text-foreground tracking-tight">WebCraft</span>
+        </Link>
+        <button
+          onClick={() => setOpen(true)}
+          className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+          aria-label="Open menu"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* ── Mobile drawer backdrop ── */}
+      {open && (
+        <div
+          className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* ── Mobile drawer ── */}
+      <div
+        className={`lg:hidden fixed top-0 left-0 z-50 h-full w-72 bg-background border-r border-border flex flex-col shadow-xl transition-transform duration-300 ease-in-out ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-end px-4 py-3 border-b border-border">
+          <button
+            onClick={() => setOpen(false)}
+            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <NavContents isActive={isActive} onNavigate={() => setOpen(false)} />
+        </div>
+      </div>
+    </>
   );
 }
