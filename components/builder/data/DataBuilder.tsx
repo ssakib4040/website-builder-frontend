@@ -91,7 +91,7 @@ export function DataBuilder() {
   return (
     <div className="h-full flex">
       {/* Collections list */}
-      <div className="w-[220px] border-r border-border flex flex-col bg-background shrink-0">
+      <div className="w-55 border-r border-border flex flex-col bg-background shrink-0">
         <div className="px-3 py-3 border-b border-border">
           <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
             Collections

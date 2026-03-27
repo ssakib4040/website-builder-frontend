@@ -45,7 +45,7 @@ export function DraggableSidebarItem({ component }: Props) {
           </span>
         </button>
       </TooltipTrigger>
-      <TooltipContent side="right" className="text-xs max-w-[180px]">
+      <TooltipContent side="right" className="text-xs max-w-45">
         {component.description}
       </TooltipContent>
     </Tooltip>

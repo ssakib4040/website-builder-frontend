@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Mail, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteNav } from "@/components/site/SiteNav";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function VerifyEmailPage() {
   const [resent, setResent] = useState(false);

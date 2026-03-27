@@ -9,7 +9,18 @@ import {
   Workflow,
   LayoutDashboard,
   Layers,
-  ExternalLink,
+  Image,
+  Rocket,
+  Globe,
+  BarChart2,
+  SearchCheck,
+  Inbox,
+  Users,
+  Puzzle,
+  KeyRound,
+  ArchiveRestore,
+  Activity,
+  Settings,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -22,6 +33,27 @@ const buildItems = [
   { href: "/dashboard/data", icon: Database, label: "Data" },
   { href: "/dashboard/api", icon: Plug, label: "APIs" },
   { href: "/dashboard/logic", icon: Workflow, label: "Logic" },
+  { href: "/dashboard/media", icon: Image, label: "Media" },
+];
+
+const deployItems = [
+  { href: "/dashboard/deployments", icon: Rocket, label: "Deployments" },
+  { href: "/dashboard/domains", icon: Globe, label: "Domains" },
+  { href: "/dashboard/analytics", icon: BarChart2, label: "Analytics" },
+  { href: "/dashboard/seo", icon: SearchCheck, label: "SEO" },
+];
+
+const usersItems = [
+  { href: "/dashboard/forms", icon: Inbox, label: "Forms" },
+  { href: "/dashboard/team", icon: Users, label: "Team" },
+];
+
+const projectItems = [
+  { href: "/dashboard/integrations", icon: Puzzle, label: "Integrations" },
+  { href: "/dashboard/env", icon: KeyRound, label: "Env Variables" },
+  { href: "/dashboard/backups", icon: ArchiveRestore, label: "Backups" },
+  { href: "/dashboard/activity", icon: Activity, label: "Activity" },
+  { href: "/dashboard/settings", icon: Settings, label: "Settings" },
 ];
 
 function NavItem({
@@ -125,6 +157,51 @@ export function DashboardNav() {
             ))}
           </div>
         </div>
+
+        <div>
+          <SectionLabel label="Deploy" />
+          <div className="space-y-0.5">
+            {deployItems.map(({ href, icon, label }) => (
+              <NavItem
+                key={href}
+                href={href}
+                icon={icon}
+                label={label}
+                isActive={isActive(href)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <SectionLabel label="Users" />
+          <div className="space-y-0.5">
+            {usersItems.map(({ href, icon, label }) => (
+              <NavItem
+                key={href}
+                href={href}
+                icon={icon}
+                label={label}
+                isActive={isActive(href)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <SectionLabel label="Project" />
+          <div className="space-y-0.5">
+            {projectItems.map(({ href, icon, label }) => (
+              <NavItem
+                key={href}
+                href={href}
+                icon={icon}
+                label={label}
+                isActive={isActive(href)}
+              />
+            ))}
+          </div>
+        </div>
       </nav>
 
       {/* ── Footer ── */}
@@ -133,7 +210,7 @@ export function DashboardNav() {
           href="/builder"
           className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all duration-150 group"
         >
-          <ExternalLink className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
+          <Rocket className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
           Open Builder
         </Link>
         <div className="flex items-center justify-between px-3 py-1.5">

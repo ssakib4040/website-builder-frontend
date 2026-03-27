@@ -63,7 +63,7 @@ export function CanvasNode({ node, index }: Props) {
         className={`
           group relative rounded-lg transition-all duration-150 ease-out
           ${isDragging ? "opacity-30 scale-[0.98]" : ""}
-          ${isSelected ? "ring-2 ring-primary/30 bg-primary/[0.02]" : ""}
+          ${isSelected ? "ring-2 ring-primary/30 bg-primary/2" : ""}
           ${isHovered && !isSelected ? "bg-accent/40" : ""}
         `}
         onClick={(e) => {

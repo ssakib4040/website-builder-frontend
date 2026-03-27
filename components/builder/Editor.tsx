@@ -77,7 +77,7 @@ export function Editor() {
             className={`
               border-r border-border bg-background
               transition-all duration-300 ease-in-out overflow-hidden
-              ${sidebarOpen ? "w-[260px] opacity-100" : "w-0 opacity-0"}
+              ${sidebarOpen ? "w-65 opacity-100" : "w-0 opacity-0"}
             `}
           >
             <ComponentSidebar />
@@ -93,7 +93,7 @@ export function Editor() {
             className={`
               border-l border-border bg-background
               transition-all duration-300 ease-in-out overflow-hidden
-              ${propertiesPanelOpen && selectedNodeId ? "w-[300px] opacity-100" : "w-0 opacity-0"}
+              ${propertiesPanelOpen && selectedNodeId ? "w-75 opacity-100" : "w-0 opacity-0"}
             `}
           >
             <PropertiesPanel />

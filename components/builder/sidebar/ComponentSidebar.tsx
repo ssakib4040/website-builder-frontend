@@ -21,7 +21,7 @@ export function ComponentSidebar() {
   const categories = [...new Set(filtered.map((c) => c.category))];
 
   return (
-    <div className="h-full flex flex-col w-[260px]">
+    <div className="h-full flex flex-col w-65">
       {/* Search */}
       <div className="px-3 pt-3 pb-2">
         <div className="relative">

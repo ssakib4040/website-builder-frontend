@@ -115,7 +115,7 @@ export function ApiBuilder() {
               value={newMethod}
               onValueChange={(v) => setNewMethod(v as HttpMethod)}
             >
-              <SelectTrigger className="h-7 text-xs w-[100px]">
+              <SelectTrigger className="h-7 text-xs w-25">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

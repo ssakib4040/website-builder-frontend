@@ -223,7 +223,7 @@ export default function TemplatesPage() {
                 >
                   {/* Preview area */}
                   <div
-                    className={`h-44 bg-gradient-to-br ${t.accent} flex items-end p-3`}
+                    className={`h-44 bg-linear-to-br ${t.accent} flex items-end p-3`}
                   >
                     <div className="flex gap-1.5">
                       {t.tags.map((tag) => (

@@ -125,7 +125,7 @@ export function LogicBuilder() {
   return (
     <div className="h-full flex">
       {/* Workflow list */}
-      <div className="w-[220px] border-r border-border flex flex-col bg-background shrink-0">
+      <div className="w-55 border-r border-border flex flex-col bg-background shrink-0">
         <div className="px-3 py-3 border-b border-border flex items-center justify-between">
           <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
             Workflows
@@ -397,7 +397,7 @@ export function LogicBuilder() {
                     <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-2">
                       Output
                     </p>
-                    <pre className="p-3 rounded-lg bg-foreground/[0.03] border border-border text-[11px] font-mono text-foreground/80 whitespace-pre-wrap leading-relaxed">
+                    <pre className="p-3 rounded-lg bg-foreground/3 border border-border text-[11px] font-mono text-foreground/80 whitespace-pre-wrap leading-relaxed">
                       {testOutput}
                     </pre>
                   </div>

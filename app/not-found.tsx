@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { Layers, ArrowLeft, Home, Mail } from "lucide-react";
+import { Layers, Home, Mail } from "lucide-react";
 
 export default function NotFound() {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-background overflow-hidden px-6">
       {/* Radial glow */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="w-[600px] h-[600px] rounded-full bg-foreground/[0.03] dark:bg-foreground/[0.07] blur-3xl" />
+        <div className="w-150 h-150 rounded-full bg-foreground/3 dark:bg-foreground/7 blur-3xl" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center text-center max-w-lg mx-auto gap-8">
@@ -22,7 +22,7 @@ export default function NotFound() {
 
         {/* 404 number + heading */}
         <div className="space-y-4">
-          <p className="text-[9rem] leading-none font-black tracking-tighter text-foreground/[0.06] dark:text-foreground/[0.15] select-none">
+          <p className="text-[9rem] leading-none font-black tracking-tighter text-foreground/6 dark:text-foreground/15 select-none">
             404
           </p>
           <div className="-mt-6 space-y-3">

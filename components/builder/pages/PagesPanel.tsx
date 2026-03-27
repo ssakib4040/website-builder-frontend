@@ -38,7 +38,7 @@ export function PagesPanel() {
   }
 
   return (
-    <div className="h-full flex flex-col w-[220px] border-r border-border bg-background">
+    <div className="h-full flex flex-col w-55 border-r border-border bg-background">
       <div className="px-3 py-3 border-b border-border flex items-center justify-between">
         <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
           Pages

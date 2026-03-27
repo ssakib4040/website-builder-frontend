@@ -193,7 +193,7 @@ export default function ContactPage() {
                     Message *
                   </label>
                   <textarea
-                    className="w-full min-h-[160px] px-3 py-2 text-sm rounded-md border border-input bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                    className="w-full min-h-40 px-3 py-2 text-sm rounded-md border border-input bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
                     placeholder="Tell us what's on your mind..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}

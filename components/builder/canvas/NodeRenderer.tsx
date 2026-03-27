@@ -113,7 +113,7 @@ export function NodeRenderer({ node }: Props) {
       };
       return (
         <div
-          className="w-full rounded-lg border border-dashed border-border/40 min-h-[80px] flex items-center justify-center"
+          className="w-full rounded-lg border border-dashed border-border/40 min-h-20 flex items-center justify-center"
           style={{
             padding: paddingMap[p.padding as string] ?? "2rem",
             backgroundColor: p.background as string,
@@ -133,7 +133,7 @@ export function NodeRenderer({ node }: Props) {
       };
       return (
         <div
-          className="w-full grid min-h-[60px]"
+          className="w-full grid min-h-15"
           style={{
             gridTemplateColumns: `repeat(${cols}, 1fr)`,
             gap: gapMap[p.gap as string] ?? "1rem",
