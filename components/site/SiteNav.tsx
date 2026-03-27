@@ -22,6 +22,12 @@ export function SiteNav() {
 
         <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
           <Link
+            href="/templates"
+            className="hover:text-foreground transition-colors"
+          >
+            Templates
+          </Link>
+          <Link
             href="/features"
             className="hover:text-foreground transition-colors"
           >
@@ -75,6 +81,7 @@ export function SiteNav() {
       {open && (
         <div className="md:hidden border-t border-border bg-background px-6 py-4 space-y-3">
           {[
+            { href: "/templates", label: "Templates" },
             { href: "/features", label: "Features" },
             { href: "/pricing", label: "Pricing" },
             { href: "/about", label: "About" },
