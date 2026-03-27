@@ -7,6 +7,7 @@ import { ArrowLeft, Monitor, Tablet, Smartphone } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 type Viewport = "desktop" | "tablet" | "mobile";
 
@@ -68,7 +69,9 @@ export default function PreviewPage() {
             ))}
           </div>
 
-          <div className="w-[100px]" />
+          <div className="w-[100px] flex justify-end">
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Preview content */}

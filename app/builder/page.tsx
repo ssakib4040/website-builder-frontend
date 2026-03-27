@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Editor } from "@/components/builder/Editor";
 import { useEditorStore } from "@/lib/builder/store";
 
-export default function BuilderPage() {
+function BuilderInner() {
   const searchParams = useSearchParams();
   const pageId = searchParams.get("page");
   const { setActivePage, pages } = useEditorStore();
@@ -21,5 +21,13 @@ export default function BuilderPage() {
     <TooltipProvider delayDuration={200}>
       <Editor />
     </TooltipProvider>
+  );
+}
+
+export default function BuilderPage() {
+  return (
+    <Suspense>
+      <BuilderInner />
+    </Suspense>
   );
 }

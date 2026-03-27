@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type { ViewportMode } from "@/lib/builder/types";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Toolbar() {
   const {
@@ -154,6 +155,10 @@ export function Toolbar() {
             Preview
           </Link>
         </Button>
+
+        <Separator orientation="vertical" className="h-5 mx-1" />
+
+        <ThemeToggle />
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Overview" },
@@ -69,6 +70,10 @@ export function DashboardNav() {
           </Tooltip>
         );
       })}
+
+      <div className="mt-auto mb-1">
+        <ThemeToggle />
+      </div>
     </div>
   );
 }
