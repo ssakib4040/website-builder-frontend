@@ -76,7 +76,7 @@ export function DashboardNav() {
       : pathname.startsWith(href);
 
   return (
-    <div className="w-56 border-r border-border bg-background flex flex-col shrink-0">
+    <div className="w-64 border-r border-border bg-background flex flex-col shrink-0">
       {/* ── Brand ── */}
       <div className="px-4 py-4 border-b border-border">
         <Link href="/" className="flex items-center gap-2.5 group">
