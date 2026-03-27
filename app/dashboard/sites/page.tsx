@@ -114,8 +114,8 @@ export default function SitesPage() {
         <div>
           <h1 className="text-lg font-semibold text-foreground">All Sites</h1>
           <p className="text-sm text-muted-foreground mt-0.5">
-            {sites.length} site{sites.length !== 1 ? "s" : ""} · manage all
-            your WebCraft projects in one place.
+            {sites.length} site{sites.length !== 1 ? "s" : ""} · manage all your
+            WebCraft projects in one place.
           </p>
         </div>
         <Button
@@ -150,9 +150,7 @@ export default function SitesPage() {
                   : "text-muted-foreground hover:text-foreground hover:bg-accent/60"
               }`}
             >
-              {s === "all"
-                ? "All"
-                : s.charAt(0).toUpperCase() + s.slice(1)}
+              {s === "all" ? "All" : s.charAt(0).toUpperCase() + s.slice(1)}
             </button>
           ))}
         </div>
@@ -169,7 +167,9 @@ export default function SitesPage() {
               No sites found
             </p>
             <p className="text-sm text-muted-foreground mb-4">
-              {search ? "Try a different search term." : "Create your first site to get started."}
+              {search
+                ? "Try a different search term."
+                : "Create your first site to get started."}
             </p>
             <Button size="sm" onClick={() => setShowNew(true)}>
               <Plus className="w-3.5 h-3.5 mr-1.5" />
@@ -179,7 +179,11 @@ export default function SitesPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {filtered.map((site) => {
-              const { label, color, icon: StatusIcon } = statusConfig[site.status];
+              const {
+                label,
+                color,
+                icon: StatusIcon,
+              } = statusConfig[site.status];
               const isCurrent = site.id === currentSiteId;
               return (
                 <div
@@ -279,7 +283,10 @@ export default function SitesPage() {
                         className="h-7 text-xs gap-1"
                         asChild
                       >
-                        <Link href="/builder" onClick={() => setCurrentSite(site.id)}>
+                        <Link
+                          href="/builder"
+                          onClick={() => setCurrentSite(site.id)}
+                        >
                           <ExternalLink className="w-3 h-3" />
                           Builder
                         </Link>
@@ -290,7 +297,10 @@ export default function SitesPage() {
                         className="h-7 w-7 p-0 text-muted-foreground"
                         asChild
                       >
-                        <Link href="/dashboard/settings" onClick={() => setCurrentSite(site.id)}>
+                        <Link
+                          href="/dashboard/settings"
+                          onClick={() => setCurrentSite(site.id)}
+                        >
                           <Settings className="w-3.5 h-3.5" />
                         </Link>
                       </Button>
@@ -336,10 +346,7 @@ export default function SitesPage() {
                 <p className="text-xs text-muted-foreground">
                   URL:{" "}
                   <span className="font-mono text-foreground">
-                    {newName
-                      .trim()
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}
+                    {newName.trim().toLowerCase().replace(/\s+/g, "-")}
                     .webcraft.app
                   </span>
                 </p>
@@ -363,7 +370,9 @@ export default function SitesPage() {
               disabled={!newName.trim() || creating}
               onClick={handleCreate}
             >
-              {creating && <Loader2 className="w-3.5 h-3.5 mr-2 animate-spin" />}
+              {creating && (
+                <Loader2 className="w-3.5 h-3.5 mr-2 animate-spin" />
+              )}
               {creating ? "Creating…" : "Create Site"}
             </Button>
           </DialogFooter>

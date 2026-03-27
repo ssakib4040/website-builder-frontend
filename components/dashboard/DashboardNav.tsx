@@ -159,9 +159,7 @@ function SiteSwitcher({ onNavigate }: { onNavigate?: () => void }) {
                   onNavigate?.();
                 }}
                 className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-left transition-colors ${
-                  site.id === currentSiteId
-                    ? "bg-accent"
-                    : "hover:bg-accent/60"
+                  site.id === currentSiteId ? "bg-accent" : "hover:bg-accent/60"
                 }`}
               >
                 <div
@@ -184,7 +182,10 @@ function SiteSwitcher({ onNavigate }: { onNavigate?: () => void }) {
           <div className="border-t border-border p-1.5 space-y-0.5">
             <Link
               href="/dashboard/sites"
-              onClick={() => { setOpen(false); onNavigate?.(); }}
+              onClick={() => {
+                setOpen(false);
+                onNavigate?.();
+              }}
               className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors"
             >
               <LayoutGrid className="w-3.5 h-3.5" />
@@ -192,7 +193,10 @@ function SiteSwitcher({ onNavigate }: { onNavigate?: () => void }) {
             </Link>
             <Link
               href="/dashboard/sites"
-              onClick={() => { setOpen(false); onNavigate?.(); }}
+              onClick={() => {
+                setOpen(false);
+                onNavigate?.();
+              }}
               className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -360,7 +364,9 @@ export function DashboardNav() {
             <Layers className="w-3.5 h-3.5 text-background" />
           </div>
           <div className="min-w-0">
-            <span className="text-sm font-semibold text-foreground tracking-tight">WebCraft</span>
+            <span className="text-sm font-semibold text-foreground tracking-tight">
+              WebCraft
+            </span>
             {currentSite && (
               <span className="text-xs text-muted-foreground ml-1.5 hidden sm:inline">
                 / {currentSite.name}

@@ -416,7 +416,9 @@ export default function DashboardPage() {
                   <div className="flex items-center gap-2">
                     <Globe className="w-4 h-4 text-muted-foreground shrink-0" />
                     <span className="text-sm font-mono text-foreground flex-1 truncate">
-                      {currentSite?.customDomain ?? currentSite?.subdomain ?? ""}
+                      {currentSite?.customDomain ??
+                        currentSite?.subdomain ??
+                        ""}
                     </span>
                     <span
                       className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full uppercase tracking-wide ${
