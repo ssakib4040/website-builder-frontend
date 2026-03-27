@@ -241,14 +241,14 @@ export default function TemplatesPage() {
                   <div className="p-4 flex flex-col gap-3 flex-1">
                     <div className="space-y-1">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-semibold text-foreground">
+                        <h3 className="text-base font-semibold text-foreground">
                           {t.name}
                         </h3>
                         <span className="text-xs text-muted-foreground">
                           {t.category}
                         </span>
                       </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed">
+                      <p className="text-sm text-muted-foreground leading-relaxed">
                         {t.description}
                       </p>
                     </div>

@@ -110,7 +110,7 @@ export default function ContactPage() {
               <p className="text-sm font-medium text-foreground">
                 Looking for support?
               </p>
-              <p className="text-xs text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 For billing issues or technical help, check our help center
                 first — most answers are there instantly.
               </p>
@@ -155,7 +155,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-foreground">
+                    <label className="text-sm font-medium text-foreground">
                       Name *
                     </label>
                     <Input
@@ -165,7 +165,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-foreground">
+                    <label className="text-sm font-medium text-foreground">
                       Email *
                     </label>
                     <Input
@@ -178,7 +178,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-foreground">
+                  <label className="text-sm font-medium text-foreground">
                     Subject
                   </label>
                   <Input
@@ -189,7 +189,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-foreground">
+                  <label className="text-sm font-medium text-foreground">
                     Message *
                   </label>
                   <textarea

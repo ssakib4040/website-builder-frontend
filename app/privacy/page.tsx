@@ -72,7 +72,7 @@ export default function PrivacyPage() {
               {body.split("\n\n").map((para, i) => (
                 <p
                   key={i}
-                  className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line"
+                  className="text-base text-muted-foreground leading-relaxed whitespace-pre-line"
                 >
                   {para}
                 </p>

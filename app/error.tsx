@@ -24,7 +24,7 @@ export default function ErrorPage({
         <h1 className="text-2xl font-bold text-foreground -mt-8 relative">
           Something went wrong
         </h1>
-        <p className="text-sm text-muted-foreground max-w-sm mx-auto">
+        <p className="text-base text-muted-foreground max-w-sm mx-auto">
           An unexpected error occurred. Our team has been notified. You can try
           refreshing or head back home.
         </p>

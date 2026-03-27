@@ -187,10 +187,10 @@ export default function BlogPage() {
                     {post.readTime}
                   </span>
                 </div>
-                <h3 className="font-semibold text-foreground text-sm group-hover:underline underline-offset-2 leading-snug">
+                <h3 className="font-semibold text-foreground text-base group-hover:underline underline-offset-2 leading-snug">
                   {post.title}
                 </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
                 <div className="flex items-center justify-between pt-1">

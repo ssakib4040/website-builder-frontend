@@ -175,10 +175,10 @@ export default function DocsPage() {
                       <Icon className="w-5 h-5 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-foreground">
+                      <h3 className="text-base font-semibold text-foreground">
                         {title}
                       </h3>
-                      <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                      <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">
                         {description}
                       </p>
                     </div>
@@ -188,7 +188,7 @@ export default function DocsPage() {
                       <li key={label}>
                         <Link
                           href={href}
-                          className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors group"
+                          className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors group"
                         >
                           <ArrowRight className="w-3 h-3 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                           {label}

@@ -79,7 +79,7 @@ export default function TermsPage() {
               {body.split("\n\n").map((para, i) => (
                 <p
                   key={i}
-                  className="text-sm text-muted-foreground leading-relaxed"
+                  className="text-base text-muted-foreground leading-relaxed"
                 >
                   {para}
                 </p>

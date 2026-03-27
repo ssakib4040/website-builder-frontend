@@ -59,7 +59,7 @@ export default function CookiesPage() {
             <h2 className="text-lg font-semibold text-foreground">
               What are cookies?
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Cookies are small text files placed on your device when you visit
               a website. They serve many purposes: keeping you signed in,
               remembering your preferences, understanding how you use the site,
@@ -72,7 +72,7 @@ export default function CookiesPage() {
             <h2 className="text-lg font-semibold text-foreground">
               How long do cookies last?
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               <strong className="text-foreground">Session cookies</strong>{" "}
               expire when you close your browser. They are used primarily for
               authentication and security.{" "}
@@ -108,7 +108,7 @@ export default function CookiesPage() {
                       {required ? "Always active" : "Optional"}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     {description}
                   </p>
                   {examples.length > 0 && (
@@ -132,11 +132,11 @@ export default function CookiesPage() {
             <h2 className="text-lg font-semibold text-foreground">
               Third-party cookies
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Some features of WebCraft rely on third-party services that may
               set their own cookies. Currently these include:
             </p>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-2 text-base text-muted-foreground">
               {[
                 {
                   name: "Stripe",
@@ -166,13 +166,13 @@ export default function CookiesPage() {
             <h2 className="text-lg font-semibold text-foreground">
               Managing cookies
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               You can control and delete cookies through your browser settings.
               Note that disabling cookies may affect the functionality of
               WebCraft — in particular, you will not be able to stay signed in
               if session cookies are disabled.
             </p>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               For more information on managing cookies in your browser, visit{" "}
               <a
                 href="https://www.allaboutcookies.org"
@@ -190,7 +190,7 @@ export default function CookiesPage() {
             <h2 className="text-lg font-semibold text-foreground">
               Changes to this policy
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               We may update this Cookie Policy periodically. When we do, we will
               revise the &quot;Last updated&quot; date. Continued use of the service
               constitutes acceptance of the updated policy.
@@ -199,7 +199,7 @@ export default function CookiesPage() {
 
           <section className="space-y-3">
             <h2 className="text-lg font-semibold text-foreground">Contact</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Questions about this policy? Email{" "}
               <a
                 href="mailto:privacy@webcraft.io"

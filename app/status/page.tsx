@@ -199,7 +199,7 @@ export default function StatusPage() {
                     className="flex items-center justify-between px-4 py-3 bg-background hover:bg-accent/30 transition-colors"
                   >
                     <div>
-                      <p className="text-sm font-medium text-foreground">
+                      <p className="text-base font-medium text-foreground">
                         {svc.name}
                       </p>
                       <p className="text-xs text-muted-foreground">
@@ -288,7 +288,7 @@ export default function StatusPage() {
                           <p className="text-xs font-medium text-muted-foreground">
                             {u.time}
                           </p>
-                          <p className="text-xs text-muted-foreground leading-relaxed">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
                             {u.body}
                           </p>
                         </div>
