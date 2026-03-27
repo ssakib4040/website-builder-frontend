@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect, useRef, startTransition } from "react";
 import {
   FileText,
   Database,
@@ -70,15 +70,19 @@ function NavItem({
   icon: Icon,
   label,
   isActive,
+  siteId,
 }: {
   href: string;
   icon: typeof LayoutDashboard;
   label: string;
   isActive: boolean;
+  siteId?: string;
 }) {
+  const fullHref =
+    siteId && href !== "/dashboard/sites" ? `${href}?site=${siteId}` : href;
   return (
     <Link
-      href={href}
+      href={fullHref}
       className={`
         relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm
         transition-all duration-150 group
@@ -112,6 +116,8 @@ function SiteSwitcher({ onNavigate }: { onNavigate?: () => void }) {
   const { sites, currentSiteId, setCurrentSite } = useSitesStore();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
   const current = sites.find((s) => s.id === currentSiteId) ?? sites[0];
 
   // Close on outside click
@@ -157,6 +163,11 @@ function SiteSwitcher({ onNavigate }: { onNavigate?: () => void }) {
                   setCurrentSite(site.id);
                   setOpen(false);
                   onNavigate?.();
+                  router.push(
+                    pathname !== "/dashboard/sites"
+                      ? `${pathname}?site=${site.id}`
+                      : `/dashboard?site=${site.id}`,
+                  );
                 }}
                 className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-left transition-colors ${
                   site.id === currentSiteId ? "bg-accent" : "hover:bg-accent/60"
@@ -211,9 +222,11 @@ function SiteSwitcher({ onNavigate }: { onNavigate?: () => void }) {
 
 function NavContents({
   isActive,
+  siteId,
   onNavigate,
 }: {
   isActive: (href: string) => boolean;
+  siteId: string;
   onNavigate?: () => void;
 }) {
   return (
@@ -246,6 +259,7 @@ function NavContents({
                 icon={icon}
                 label={label}
                 isActive={isActive(href)}
+                siteId={siteId}
               />
             ))}
           </div>
@@ -260,6 +274,7 @@ function NavContents({
                 icon={icon}
                 label={label}
                 isActive={isActive(href)}
+                siteId={siteId}
               />
             ))}
           </div>
@@ -274,6 +289,7 @@ function NavContents({
                 icon={icon}
                 label={label}
                 isActive={isActive(href)}
+                siteId={siteId}
               />
             ))}
           </div>
@@ -288,6 +304,7 @@ function NavContents({
                 icon={icon}
                 label={label}
                 isActive={isActive(href)}
+                siteId={siteId}
               />
             ))}
           </div>
@@ -302,6 +319,7 @@ function NavContents({
                 icon={icon}
                 label={label}
                 isActive={isActive(href)}
+                siteId={siteId}
               />
             ))}
           </div>
@@ -328,13 +346,23 @@ function NavContents({
 
 export function DashboardNav() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
-  const { sites, currentSiteId } = useSitesStore();
+  const { sites, currentSiteId, setCurrentSite } = useSitesStore();
   const currentSite = sites.find((s) => s.id === currentSiteId) ?? sites[0];
+
+  // Sync ?site= URL param → store on navigation
+  useEffect(() => {
+    const siteId = searchParams.get("site");
+    if (siteId && siteId !== currentSiteId) {
+      const exists = sites.find((s) => s.id === siteId);
+      if (exists) startTransition(() => setCurrentSite(siteId));
+    }
+  }, [searchParams, currentSiteId, sites, setCurrentSite]);
 
   // Close drawer on route change
   useEffect(() => {
-    setOpen(false);
+    startTransition(() => setOpen(false));
   }, [pathname]);
 
   // Prevent body scroll when drawer is open
@@ -354,7 +382,7 @@ export function DashboardNav() {
     <>
       {/* ── Desktop sidebar ── */}
       <div className="hidden lg:flex w-64 border-r border-border bg-background flex-col shrink-0">
-        <NavContents isActive={isActive} />
+        <NavContents isActive={isActive} siteId={currentSiteId} />
       </div>
 
       {/* ── Mobile top bar ── */}
@@ -407,7 +435,7 @@ export function DashboardNav() {
           </button>
         </div>
         <div className="flex flex-col flex-1 overflow-hidden">
-          <NavContents isActive={isActive} onNavigate={() => setOpen(false)} />
+          <NavContents isActive={isActive} siteId={currentSiteId} onNavigate={() => setOpen(false)} />
         </div>
       </div>
     </>

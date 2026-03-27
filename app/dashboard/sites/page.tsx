@@ -94,7 +94,7 @@ export default function SitesPage() {
 
   function handleOpen(site: Site) {
     setCurrentSite(site.id);
-    router.push("/dashboard");
+    router.push(`/dashboard?site=${site.id}`);
   }
 
   function handleDelete() {
