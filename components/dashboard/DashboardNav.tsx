@@ -118,19 +118,32 @@ function NavContents({
             <Layers className="w-4 h-4 text-background" />
           </div>
           <div className="leading-none">
-            <p className="text-sm font-semibold text-foreground tracking-tight">WebCraft</p>
-            <p className="text-[10px] text-muted-foreground mt-0.5">No-code builder</p>
+            <p className="text-sm font-semibold text-foreground tracking-tight">
+              WebCraft
+            </p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">
+              No-code builder
+            </p>
           </div>
         </Link>
       </div>
 
       {/* ── Navigation ── */}
-      <nav className="flex-1 px-2 py-4 space-y-4 overflow-y-auto" onClick={onNavigate}>
+      <nav
+        className="flex-1 px-2 py-4 space-y-4 overflow-y-auto"
+        onClick={onNavigate}
+      >
         <div>
           <SectionLabel label="General" />
           <div className="space-y-0.5">
             {mainItems.map(({ href, icon, label }) => (
-              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
+              <NavItem
+                key={href}
+                href={href}
+                icon={icon}
+                label={label}
+                isActive={isActive(href)}
+              />
             ))}
           </div>
         </div>
@@ -138,7 +151,13 @@ function NavContents({
           <SectionLabel label="Build" />
           <div className="space-y-0.5">
             {buildItems.map(({ href, icon, label }) => (
-              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
+              <NavItem
+                key={href}
+                href={href}
+                icon={icon}
+                label={label}
+                isActive={isActive(href)}
+              />
             ))}
           </div>
         </div>
@@ -146,7 +165,13 @@ function NavContents({
           <SectionLabel label="Deploy" />
           <div className="space-y-0.5">
             {deployItems.map(({ href, icon, label }) => (
-              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
+              <NavItem
+                key={href}
+                href={href}
+                icon={icon}
+                label={label}
+                isActive={isActive(href)}
+              />
             ))}
           </div>
         </div>
@@ -154,7 +179,13 @@ function NavContents({
           <SectionLabel label="Users" />
           <div className="space-y-0.5">
             {usersItems.map(({ href, icon, label }) => (
-              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
+              <NavItem
+                key={href}
+                href={href}
+                icon={icon}
+                label={label}
+                isActive={isActive(href)}
+              />
             ))}
           </div>
         </div>
@@ -162,7 +193,13 @@ function NavContents({
           <SectionLabel label="Project" />
           <div className="space-y-0.5">
             {projectItems.map(({ href, icon, label }) => (
-              <NavItem key={href} href={href} icon={icon} label={label} isActive={isActive(href)} />
+              <NavItem
+                key={href}
+                href={href}
+                icon={icon}
+                label={label}
+                isActive={isActive(href)}
+              />
             ))}
           </div>
         </div>
@@ -191,12 +228,16 @@ export function DashboardNav() {
   const [open, setOpen] = useState(false);
 
   // Close drawer on route change
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   // Prevent body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   const isActive = (href: string) =>
@@ -217,7 +258,9 @@ export function DashboardNav() {
           <div className="w-6 h-6 rounded-md bg-foreground flex items-center justify-center shrink-0">
             <Layers className="w-3.5 h-3.5 text-background" />
           </div>
-          <span className="text-sm font-semibold text-foreground tracking-tight">WebCraft</span>
+          <span className="text-sm font-semibold text-foreground tracking-tight">
+            WebCraft
+          </span>
         </Link>
         <button
           onClick={() => setOpen(true)}
