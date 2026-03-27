@@ -435,7 +435,11 @@ export function DashboardNav() {
           </button>
         </div>
         <div className="flex flex-col flex-1 overflow-hidden">
-          <NavContents isActive={isActive} siteId={currentSiteId} onNavigate={() => setOpen(false)} />
+          <NavContents
+            isActive={isActive}
+            siteId={currentSiteId}
+            onNavigate={() => setOpen(false)}
+          />
         </div>
       </div>
     </>
