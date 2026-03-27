@@ -1,7 +1,7 @@
 "use client";
 
 import { useEditorStore } from "@/lib/builder/store";
-import { FileText, Database, Plug, Workflow } from "lucide-react";
+import { Database, Plug, Workflow } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -9,8 +9,7 @@ import {
 } from "@/components/ui/tooltip";
 import type { ActiveTab } from "@/lib/builder/types";
 
-const tabs: { id: ActiveTab; icon: typeof FileText; label: string }[] = [
-  { id: "pages", icon: FileText, label: "Pages" },
+const tabs: { id: ActiveTab; icon: typeof Database; label: string }[] = [
   { id: "data", icon: Database, label: "Data" },
   { id: "api", icon: Plug, label: "APIs" },
   { id: "logic", icon: Workflow, label: "Logic" },
@@ -25,7 +24,7 @@ export function AppNav() {
         <Tooltip key={id}>
           <TooltipTrigger asChild>
             <button
-              onClick={() => setActiveTab(id)}
+              onClick={() => setActiveTab(activeTab === id ? null : id)}
               className={`
                 w-9 h-9 rounded-lg flex items-center justify-center
                 transition-all duration-150

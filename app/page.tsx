@@ -25,10 +25,10 @@ export default function Home() {
 
         {/* CTA */}
         <Link
-          href="/builder"
+          href="/dashboard"
           className="inline-flex items-center gap-2 h-11 px-6 rounded-lg bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
         >
-          Open Builder
+          Open Dashboard
           <ArrowRight className="w-4 h-4" />
         </Link>
 

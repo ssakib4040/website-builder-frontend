@@ -18,6 +18,7 @@ import {
   PanelRight,
   Trash2,
   Eye,
+  ArrowLeft,
 } from "lucide-react";
 import Link from "next/link";
 import type { ViewportMode } from "@/lib/builder/types";
@@ -61,9 +62,10 @@ export function Toolbar() {
       {/* Left group */}
       <div className="flex items-center gap-1">
         <Link
-          href="/"
-          className="text-sm font-semibold text-foreground mr-3 hover:opacity-70 transition-opacity"
+          href="/dashboard/pages"
+          className="flex items-center gap-1.5 text-sm font-semibold text-foreground mr-3 hover:opacity-70 transition-opacity"
         >
+          <ArrowLeft className="w-4 h-4" />
           Builder
         </Link>
 

@@ -127,7 +127,7 @@ export interface Workflow {
 }
 
 // ── Editor State ───────────────────────────────────────
-export type ActiveTab = "pages" | "data" | "api" | "logic";
+export type ActiveTab = "data" | "api" | "logic";
 
 export interface EditorState {
   // Active section

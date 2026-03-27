@@ -52,8 +52,8 @@ const defaultPages = createDefaultPages();
 // ── Store Interface ────────────────────────────────────
 interface EditorStore {
   // Tab
-  activeTab: ActiveTab;
-  setActiveTab: (tab: ActiveTab) => void;
+  activeTab: ActiveTab | null;
+  setActiveTab: (tab: ActiveTab | null) => void;
 
   // Pages
   pages: AppPage[];
@@ -172,7 +172,7 @@ function updatePageNodes(
 // ── Store ──────────────────────────────────────────────
 export const useEditorStore = create<EditorStore>((set, get) => ({
   // Tab
-  activeTab: "pages",
+  activeTab: null,
   setActiveTab: (tab) => set({ activeTab: tab }),
 
   // Pages
