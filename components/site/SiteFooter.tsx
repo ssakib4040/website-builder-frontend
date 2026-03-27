@@ -14,7 +14,7 @@ export function SiteFooter() {
               WebCraft
             </span>
           </div>
-          <p className="text-xs text-muted-foreground leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             Build beautiful websites visually. No code required.
           </p>
         </div>
