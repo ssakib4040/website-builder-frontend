@@ -9,6 +9,7 @@ No real backend — everything is mocked.
 * Design: Notion-like (clean, minimal, consistent)
 * Always use shadcn components, custom components only when necessary as a last resort
 * Zero errors: no TypeScript or lint issues (`npm run lint` must pass)
+* Any page/ui created or modified always add the dark version also
 
 
 
