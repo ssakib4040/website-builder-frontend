@@ -225,12 +225,12 @@ export default function DocsPage() {
               Ask questions, share projects, and get tips from 24,000+ WebCraft
               users.
             </p>
-            <a
-              href="#"
+            <Link
+              href="/contact"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
             >
               Visit community <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            </Link>
           </div>
         </section>
       </main>

@@ -57,13 +57,13 @@ export function SiteNav() {
           <ThemeToggle />
           <Link
             href="/sign-in"
-            className="h-8 px-4 text-sm font-medium rounded-lg border border-border hover:bg-accent/60 transition-colors text-foreground flex items-center"
+            className="h-8 px-4 text-base font-medium rounded-lg border border-border hover:bg-accent/60 transition-colors text-foreground flex items-center"
           >
             Sign in
           </Link>
           <Link
             href="/sign-up"
-            className="h-8 px-4 text-sm font-medium rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity flex items-center gap-1.5"
+            className="h-8 px-4 text-base font-medium rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity flex items-center gap-1.5"
           >
             Get started
             <ArrowRight className="w-3.5 h-3.5" />
@@ -90,7 +90,7 @@ export function SiteNav() {
             <Link
               key={href}
               href={href}
-              className="block text-sm text-muted-foreground hover:text-foreground"
+              className="block text-base text-muted-foreground hover:text-foreground"
               onClick={() => setOpen(false)}
             >
               {label}
@@ -99,13 +99,13 @@ export function SiteNav() {
           <div className="pt-2 flex flex-col gap-2">
             <Link
               href="/sign-in"
-              className="text-sm font-medium text-center py-2 border border-border rounded-lg hover:bg-accent/60 transition-colors"
+              className="text-base font-medium text-center py-2 border border-border rounded-lg hover:bg-accent/60 transition-colors"
             >
               Sign in
             </Link>
             <Link
               href="/sign-up"
-              className="text-sm font-medium text-center py-2 bg-foreground text-background rounded-lg hover:opacity-90 transition-opacity"
+              className="text-base font-medium text-center py-2 bg-foreground text-background rounded-lg hover:opacity-90 transition-opacity"
             >
               Get started free
             </Link>

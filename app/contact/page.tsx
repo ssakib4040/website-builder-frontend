@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Mail, MapPin, MessageCircle, CheckCircle } from "lucide-react";
@@ -114,13 +115,12 @@ export default function ContactPage() {
                 For billing issues or technical help, check our help center
                 first — most answers are there instantly.
               </p>
-              <a
-                href="#"
-                className="text-xs text-foreground hover:underline font-medium"
-                onClick={(e) => e.preventDefault()}
+              <Link
+                href="/docs"
+                className="text-sm text-foreground hover:underline font-medium"
               >
                 Visit Help Center →
-              </a>
+              </Link>
             </div>
           </aside>
 
