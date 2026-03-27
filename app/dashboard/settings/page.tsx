@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, startTransition } from "react";
+import { useSearchParams } from "next/navigation";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Slider } from "@/components/ui/slider";
+import { useSitesStore, PLAN_LIMITS } from "@/lib/sites-store";
 import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
@@ -13,7 +16,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import {
-  Settings,
   Globe,
   Palette,
   Lock,
@@ -28,6 +30,14 @@ import {
   Code2,
   Eye,
   EyeOff,
+  Cpu,
+  MemoryStick,
+  Wifi,
+  HardDrive,
+  Info,
+  Zap,
+  Package,
+  Settings,
 } from "lucide-react";
 
 const tabs = [
@@ -75,7 +85,16 @@ const PLANS = [
 ];
 
 export default function SettingsPage() {
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<TabId>("general");
+  const { sites, currentSiteId } = useSitesStore();
+  const currentSite = sites.find((s) => s.id === currentSiteId) ?? sites[0];
+
+  // Sync ?tab= param on load
+  useEffect(() => {
+    const t = searchParams.get("tab") as TabId | null;
+    if (t && tabs.some((tab) => tab.id === t)) startTransition(() => setActiveTab(t));
+  }, [searchParams]);
 
   // General
   const [siteName, setSiteName] = useState("My WebCraft Site");
@@ -121,8 +140,15 @@ export default function SettingsPage() {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  // Current plan
-  const [currentPlan] = useState("pro");
+  // Current plan + billing
+  const [currentPlan, setCurrentPlan] = useState<"hobby" | "pro" | "team">(currentSite?.plan ?? "pro");
+  const [billingMode, setBillingMode] = useState<"plans" | "resources">("plans");
+  const [extraCpu, setExtraCpu] = useState([0]);
+  const [extraRam, setExtraRam] = useState([0]);
+  const [extraBw, setExtraBw] = useState([0]);
+  const [extraStorage, setExtraStorage] = useState([0]);
+  const [resourceSaving, setResourceSaving] = useState(false);
+  const [resourceSaved, setResourceSaved] = useState(false);
 
   const handleSaveGeneral = () => {
     setGeneralSaving(true);
@@ -593,149 +619,367 @@ export default function SettingsPage() {
 
             {/* ── Billing ── */}
             {activeTab === "billing" && (
-              <div className="max-w-2xl space-y-8">
-                <div>
-                  <h2 className="text-base font-semibold text-foreground mb-4">
-                    Current Plan
-                  </h2>
-                  <div className="grid grid-cols-3 gap-3">
-                    {PLANS.map((plan) => (
-                      <div
-                        key={plan.id}
-                        className={`relative p-4 rounded-xl border transition-all ${
-                          currentPlan === plan.id
-                            ? "border-foreground bg-foreground/5"
-                            : "border-border hover:border-foreground/30"
-                        }`}
-                      >
-                        {currentPlan === plan.id && (
-                          <Badge className="absolute top-3 right-3 text-xs bg-foreground text-background border-0">
-                            Current
-                          </Badge>
-                        )}
-                        <p className="text-sm font-semibold text-foreground">
-                          {plan.label}
-                        </p>
-                        <p className="text-xl font-bold text-foreground mt-1">
-                          {plan.price}
-                        </p>
-                        <ul className="mt-3 space-y-1">
-                          {plan.features.map((f) => (
-                            <li
-                              key={f}
-                              className="flex items-center gap-1.5 text-xs text-muted-foreground"
-                            >
-                              <Check className="w-3 h-3 text-emerald-500 shrink-0" />
-                              {f}
-                            </li>
-                          ))}
-                        </ul>
-                        {currentPlan !== plan.id && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="mt-4 w-full text-xs"
-                          >
-                            {PLANS.findIndex((p) => p.id === plan.id) >
-                            PLANS.findIndex((p) => p.id === currentPlan)
-                              ? "Upgrade"
-                              : "Downgrade"}
-                          </Button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+              <div className="max-w-2xl space-y-6">
+                {/* Mode switcher */}
+                <div className="flex items-center gap-1 p-1 rounded-lg bg-accent w-fit">
+                  <button
+                    onClick={() => setBillingMode("plans")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                      billingMode === "plans"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <Package className="w-3.5 h-3.5" />
+                    Plans
+                  </button>
+                  <button
+                    onClick={() => setBillingMode("resources")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                      billingMode === "resources"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <Cpu className="w-3.5 h-3.5" />
+                    Resources
+                  </button>
                 </div>
 
-                <hr className="border-border" />
-
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-3">
-                    Payment Method
-                  </h3>
-                  <div className="flex items-center justify-between p-4 rounded-lg border border-border bg-background">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-7 rounded bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
-                        <CreditCard className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-foreground">
-                          Visa ending in 4242
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          Expires 12/26
-                        </p>
+                {/* ── Plans mode ── */}
+                {billingMode === "plans" && (
+                  <div className="space-y-8">
+                    <div>
+                      <h2 className="text-base font-semibold text-foreground mb-1">Current Plan</h2>
+                      <p className="text-sm text-muted-foreground mb-4">Fixed bundles with predictable monthly pricing.</p>
+                      <div className="grid grid-cols-3 gap-3">
+                        {PLANS.map((plan) => (
+                          <div
+                            key={plan.id}
+                            className={`relative p-4 rounded-xl border transition-all ${
+                              currentPlan === plan.id
+                                ? "border-foreground bg-foreground/5"
+                                : "border-border hover:border-foreground/30"
+                            }`}
+                          >
+                            {currentPlan === plan.id && (
+                              <Badge className="absolute top-3 right-3 text-xs bg-foreground text-background border-0">
+                                Current
+                              </Badge>
+                            )}
+                            <p className="text-sm font-semibold text-foreground">{plan.label}</p>
+                            <p className="text-xl font-bold text-foreground mt-1">{plan.price}</p>
+                            <ul className="mt-3 space-y-1">
+                              {plan.features.map((f) => (
+                                <li key={f} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                                  <Check className="w-3 h-3 text-emerald-500 shrink-0" />
+                                  {f}
+                                </li>
+                              ))}
+                            </ul>
+                            {currentPlan !== plan.id && (
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="mt-4 w-full text-xs"
+                                onClick={() => setCurrentPlan(plan.id as "hobby" | "pro" | "team")}
+                              >
+                                {PLANS.findIndex((p) => p.id === plan.id) >
+                                PLANS.findIndex((p) => p.id === currentPlan)
+                                  ? "Upgrade"
+                                  : "Downgrade"}
+                              </Button>
+                            )}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                    <Button variant="outline" size="sm">
-                      Update
-                    </Button>
-                  </div>
-                </div>
 
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-3">
-                    Billing History
-                  </h3>
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b border-border">
-                        <th className="text-left pb-2 text-xs font-medium text-muted-foreground">
-                          Date
-                        </th>
-                        <th className="text-left pb-2 text-xs font-medium text-muted-foreground">
-                          Description
-                        </th>
-                        <th className="text-left pb-2 text-xs font-medium text-muted-foreground">
-                          Amount
-                        </th>
-                        <th className="text-left pb-2 text-xs font-medium text-muted-foreground">
-                          Status
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border">
-                      {[
-                        {
-                          date: "Dec 1, 2024",
-                          desc: "Pro Plan — Monthly",
-                          amount: "$19.00",
-                          status: "Paid",
-                        },
-                        {
-                          date: "Nov 1, 2024",
-                          desc: "Pro Plan — Monthly",
-                          amount: "$19.00",
-                          status: "Paid",
-                        },
-                        {
-                          date: "Oct 1, 2024",
-                          desc: "Pro Plan — Monthly",
-                          amount: "$19.00",
-                          status: "Paid",
-                        },
-                      ].map((inv, i) => (
-                        <tr key={i}>
-                          <td className="py-3 text-muted-foreground">
-                            {inv.date}
-                          </td>
-                          <td className="py-3 text-foreground">{inv.desc}</td>
-                          <td className="py-3 text-foreground font-medium">
-                            {inv.amount}
-                          </td>
-                          <td className="py-3">
-                            <Badge
-                              variant="secondary"
-                              className="text-xs bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
-                            >
-                              {inv.status}
-                            </Badge>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    <hr className="border-border" />
+
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground mb-3">Payment Method</h3>
+                      <div className="flex items-center justify-between p-4 rounded-lg border border-border bg-background">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-7 rounded bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                            <CreditCard className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-foreground">Visa ending in 4242</p>
+                            <p className="text-xs text-muted-foreground">Expires 12/26</p>
+                          </div>
+                        </div>
+                        <Button variant="outline" size="sm">Update</Button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground mb-3">Billing History</h3>
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="border-b border-border">
+                            <th className="text-left pb-2 text-xs font-medium text-muted-foreground">Date</th>
+                            <th className="text-left pb-2 text-xs font-medium text-muted-foreground">Description</th>
+                            <th className="text-left pb-2 text-xs font-medium text-muted-foreground">Amount</th>
+                            <th className="text-left pb-2 text-xs font-medium text-muted-foreground">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-border">
+                          {[
+                            { date: "Dec 1, 2024", desc: "Pro Plan — Monthly", amount: "$19.00", status: "Paid" },
+                            { date: "Nov 1, 2024", desc: "Pro Plan — Monthly", amount: "$19.00", status: "Paid" },
+                            { date: "Oct 1, 2024", desc: "Pro Plan — Monthly", amount: "$19.00", status: "Paid" },
+                          ].map((inv, i) => (
+                            <tr key={i}>
+                              <td className="py-3 text-muted-foreground">{inv.date}</td>
+                              <td className="py-3 text-foreground">{inv.desc}</td>
+                              <td className="py-3 text-foreground font-medium">{inv.amount}</td>
+                              <td className="py-3">
+                                <Badge variant="secondary" className="text-xs bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
+                                  {inv.status}
+                                </Badge>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+
+                {/* ── Resources mode ── */}
+                {billingMode === "resources" && (() => {
+                  const planLimits = PLAN_LIMITS[currentPlan as keyof typeof PLAN_LIMITS] ?? PLAN_LIMITS.hobby;
+                  const usage = {
+                    cpu: currentSite?.cpuUsage ?? 0,
+                    ram: currentSite?.ramUsedMB ?? 0,
+                    bw: currentSite?.bandwidthUsedGB ?? 0,
+                    storage: currentSite?.storageUsedGB ?? 0,
+                  };
+
+                  // per-unit add-on pricing
+                  const PRICES = {
+                    cpu: 10,      // $/vCore/mo
+                    ram: 3,       // $/GB/mo
+                    bw: 0.15,     // $/GB/mo
+                    storage: 0.25, // $/GB/mo
+                  };
+
+                  const addOnTotal =
+                    extraCpu[0] * PRICES.cpu +
+                    extraRam[0] * PRICES.ram +
+                    extraBw[0] * PRICES.bw +
+                    extraStorage[0] * PRICES.storage;
+
+                  const basePlanPrice = { hobby: 0, pro: 19, team: 49 }[currentPlan as "hobby" | "pro" | "team"] ?? 0;
+
+                  const rows: {
+                    icon: typeof Cpu;
+                    label: string;
+                    base: string;
+                    usedPct: number;
+                    extra: number[];
+                    setExtra: (v: number[]) => void;
+                    max: number;
+                    unit: string;
+                    price: number;
+                    priceUnit: string;
+                  }[] = [
+                    {
+                      icon: Cpu,
+                      label: "CPU",
+                      base: `${planLimits.cpuVCores} vCPU included`,
+                      usedPct: usage.cpu,
+                      extra: extraCpu,
+                      setExtra: setExtraCpu,
+                      max: 16,
+                      unit: "vCores",
+                      price: PRICES.cpu,
+                      priceUnit: "vCore",
+                    },
+                    {
+                      icon: MemoryStick,
+                      label: "RAM",
+                      base: `${planLimits.ramMB >= 1024 ? planLimits.ramMB / 1024 + " GB" : planLimits.ramMB + " MB"} included`,
+                      usedPct: Math.round((usage.ram / planLimits.ramMB) * 100),
+                      extra: extraRam,
+                      setExtra: setExtraRam,
+                      max: 64,
+                      unit: "GB",
+                      price: PRICES.ram,
+                      priceUnit: "GB",
+                    },
+                    {
+                      icon: Wifi,
+                      label: "Bandwidth",
+                      base: `${planLimits.bandwidthGB} GB included`,
+                      usedPct: Math.round((usage.bw / planLimits.bandwidthGB) * 100),
+                      extra: extraBw,
+                      setExtra: setExtraBw,
+                      max: 1000,
+                      unit: "GB",
+                      price: PRICES.bw,
+                      priceUnit: "GB",
+                    },
+                    {
+                      icon: HardDrive,
+                      label: "Storage",
+                      base: `${planLimits.storageGB} GB included`,
+                      usedPct: Math.round((usage.storage / planLimits.storageGB) * 100),
+                      extra: extraStorage,
+                      setExtra: setExtraStorage,
+                      max: 500,
+                      unit: "GB",
+                      price: PRICES.storage,
+                      priceUnit: "GB",
+                    },
+                  ];
+
+                  return (
+                    <div className="space-y-6">
+                      <div>
+                        <h2 className="text-base font-semibold text-foreground mb-1">Resource Add-ons</h2>
+                        <p className="text-sm text-muted-foreground">Scale individual resources on top of your {currentPlan} plan. Pay only for what you add.</p>
+                      </div>
+
+                      <div className="space-y-5">
+                        {rows.map(({ icon: Icon, label, base, usedPct, extra, setExtra, max, unit, price, priceUnit }) => (
+                          <div key={label} className="p-4 rounded-xl border border-border bg-card space-y-3">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center">
+                                  <Icon className="w-3.5 h-3.5 text-muted-foreground" />
+                                </div>
+                                <div>
+                                  <p className="text-sm font-semibold text-foreground">{label}</p>
+                                  <p className="text-xs text-muted-foreground">{base}</p>
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-xs font-medium text-foreground">
+                                  {extra[0] > 0 ? `+${extra[0]} ${unit}` : "No add-on"}
+                                </p>
+                                <p className="text-xs text-muted-foreground">
+                                  ${price}/{priceUnit}/mo
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Current usage bar */}
+                            <div>
+                              <div className="flex items-center justify-between mb-1">
+                                <span className="text-xs text-muted-foreground">Current usage</span>
+                                <span className={`text-xs font-medium ${
+                                  usedPct >= 90 ? "text-red-500" : usedPct >= 70 ? "text-orange-500" : "text-muted-foreground"
+                                }`}>{usedPct}%</span>
+                              </div>
+                              <div className="h-1.5 rounded-full bg-accent overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full transition-all ${
+                                    usedPct >= 90 ? "bg-red-500" : usedPct >= 70 ? "bg-orange-500" : "bg-foreground/40"
+                                  }`}
+                                  style={{ width: `${Math.min(usedPct, 100)}%` }}
+                                />
+                              </div>
+                            </div>
+
+                            {/* Add-on slider */}
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs text-muted-foreground">Add extra {unit}</span>
+                                <span className="text-xs font-semibold text-foreground">
+                                  {extra[0] > 0
+                                    ? `$${(extra[0] * price).toFixed(extra[0] * price < 10 ? 2 : 0)}/mo`
+                                    : "Free"}
+                                </span>
+                              </div>
+                              <Slider
+                                value={extra}
+                                onValueChange={setExtra}
+                                min={0}
+                                max={max}
+                                step={label === "CPU" ? 1 : label === "RAM" ? 1 : label === "Bandwidth" ? 10 : 5}
+                                className="w-full"
+                              />
+                              <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                                <span>0</span>
+                                <span>{max} {unit}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Summary */}
+                      <div className="rounded-xl border border-border bg-card p-5 space-y-3">
+                        <h3 className="text-sm font-semibold text-foreground">Monthly Estimate</h3>
+                        <div className="space-y-2">
+                          <div className="flex justify-between text-sm">
+                            <span className="text-muted-foreground capitalize">{currentPlan} plan</span>
+                            <span className="font-medium text-foreground">${basePlanPrice}.00</span>
+                          </div>
+                          {extraCpu[0] > 0 && (
+                            <div className="flex justify-between text-sm">
+                              <span className="text-muted-foreground">+{extraCpu[0]} vCPU</span>
+                              <span className="font-medium text-foreground">${(extraCpu[0] * PRICES.cpu).toFixed(0)}.00</span>
+                            </div>
+                          )}
+                          {extraRam[0] > 0 && (
+                            <div className="flex justify-between text-sm">
+                              <span className="text-muted-foreground">+{extraRam[0]} GB RAM</span>
+                              <span className="font-medium text-foreground">${(extraRam[0] * PRICES.ram).toFixed(0)}.00</span>
+                            </div>
+                          )}
+                          {extraBw[0] > 0 && (
+                            <div className="flex justify-between text-sm">
+                              <span className="text-muted-foreground">+{extraBw[0]} GB bandwidth</span>
+                              <span className="font-medium text-foreground">${(extraBw[0] * PRICES.bw).toFixed(2)}</span>
+                            </div>
+                          )}
+                          {extraStorage[0] > 0 && (
+                            <div className="flex justify-between text-sm">
+                              <span className="text-muted-foreground">+{extraStorage[0]} GB storage</span>
+                              <span className="font-medium text-foreground">${(extraStorage[0] * PRICES.storage).toFixed(2)}</span>
+                            </div>
+                          )}
+                          <hr className="border-border" />
+                          <div className="flex justify-between text-sm font-semibold">
+                            <span className="text-foreground">Total</span>
+                            <span className="text-foreground">${(basePlanPrice + addOnTotal).toFixed(2)}/mo</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-2 text-xs text-muted-foreground bg-accent/50 rounded-lg px-3 py-2">
+                          <Info className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                          <span>Add-ons are billed on top of your base plan. Changes take effect immediately and are prorated for the current billing period.</span>
+                        </div>
+
+                        <Button
+                          size="sm"
+                          className="w-full gap-1.5"
+                          disabled={addOnTotal === 0 || resourceSaving || resourceSaved}
+                          onClick={() => {
+                            setResourceSaving(true);
+                            setTimeout(() => {
+                              setResourceSaving(false);
+                              setResourceSaved(true);
+                              setTimeout(() => setResourceSaved(false), 2500);
+                            }, 1200);
+                          }}
+                        >
+                          {resourceSaving ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          ) : resourceSaved ? (
+                            <Check className="w-3.5 h-3.5" />
+                          ) : (
+                            <Zap className="w-3.5 h-3.5" />
+                          )}
+                          {resourceSaved ? "Saved!" : resourceSaving ? "Saving…" : "Apply Add-ons"}
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             )}
 

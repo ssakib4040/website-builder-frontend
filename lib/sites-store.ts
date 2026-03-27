@@ -14,7 +14,7 @@ export interface Site {
   collectionCount: number;
   gradient: string; // tailwind from-x to-y classes for bg-linear-to-br
   // resource usage
-  cpuUsage: number;       // 0-100 %
+  cpuUsage: number; // 0-100 %
   ramUsedMB: number;
   bandwidthUsedGB: number;
   storageUsedGB: number;
@@ -22,9 +22,27 @@ export interface Site {
 }
 
 export const PLAN_LIMITS = {
-  hobby: { cpuVCores: 0.25, ramMB: 256,  bandwidthGB: 5,   storageGB: 1,   requestsPerMonth: 50_000 },
-  pro:   { cpuVCores: 1,    ramMB: 2048, bandwidthGB: 50,  storageGB: 10,  requestsPerMonth: 500_000 },
-  team:  { cpuVCores: 4,    ramMB: 8192, bandwidthGB: 200, storageGB: 100, requestsPerMonth: 5_000_000 },
+  hobby: {
+    cpuVCores: 0.25,
+    ramMB: 256,
+    bandwidthGB: 5,
+    storageGB: 1,
+    requestsPerMonth: 50_000,
+  },
+  pro: {
+    cpuVCores: 1,
+    ramMB: 2048,
+    bandwidthGB: 50,
+    storageGB: 10,
+    requestsPerMonth: 500_000,
+  },
+  team: {
+    cpuVCores: 4,
+    ramMB: 8192,
+    bandwidthGB: 200,
+    storageGB: 100,
+    requestsPerMonth: 5_000_000,
+  },
 } as const;
 
 interface SitesStore {

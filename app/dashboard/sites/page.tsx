@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
-import { useSitesStore, type Site, type SiteStatus, PLAN_LIMITS } from "@/lib/sites-store";
+import {
+  useSitesStore,
+  type Site,
+  type SiteStatus,
+  PLAN_LIMITS,
+} from "@/lib/sites-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";

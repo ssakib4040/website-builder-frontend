@@ -477,10 +477,13 @@ export default function DashboardPage() {
                     </p>
                   </div>
                   {currentSite && currentSite.plan !== "team" && (
-                    <button className="text-xs font-medium text-foreground bg-accent hover:bg-accent/80 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1">
+                    <Link
+                      href={`/dashboard/settings?tab=billing&site=${currentSiteId}`}
+                      className="text-xs font-medium text-foreground bg-accent hover:bg-accent/80 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1"
+                    >
                       <Zap className="w-3 h-3" />
                       Upgrade
-                    </button>
+                    </Link>
                   )}
                 </div>
                 <div className="px-5 py-4 space-y-4">
@@ -610,7 +613,8 @@ export default function DashboardPage() {
                         </div>
 
                         {/* Upgrade nudge */}
-                        {(cpu >= 70 || Math.round((ram / limits.ramMB) * 100) >= 70) && (
+                        {(cpu >= 70 ||
+                          Math.round((ram / limits.ramMB) * 100) >= 70) && (
                           <div className="rounded-lg bg-orange-500/10 border border-orange-500/20 px-3 py-2.5 flex items-start gap-2">
                             <TrendingUp className="w-3.5 h-3.5 text-orange-500 mt-0.5 shrink-0" />
                             <div>
