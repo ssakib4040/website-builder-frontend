@@ -17,7 +17,6 @@ import {
   Menu,
   X,
   Eye,
-  Zap,
   ShieldCheck,
   Code2,
 } from "lucide-react";
@@ -282,14 +281,7 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden border-b border-border">
-        {/* subtle grid bg */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-size-[40px_40px] opacity-40" />
         <div className="relative max-w-6xl mx-auto px-6 py-28 text-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border bg-card text-xs text-muted-foreground mb-6">
-            <Zap className="w-3 h-3 text-amber-500" />
-            Now with automation workflows
-          </div>
-
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.05] mb-6">
             Build beautiful websites
             <br />

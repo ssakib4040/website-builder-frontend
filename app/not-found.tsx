@@ -6,7 +6,7 @@ export default function NotFound() {
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-background overflow-hidden px-6">
       {/* Radial glow */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="w-[600px] h-[600px] rounded-full bg-foreground/[0.03] blur-3xl" />
+        <div className="w-[600px] h-[600px] rounded-full bg-foreground/[0.03] dark:bg-foreground/[0.07] blur-3xl" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center text-center max-w-lg mx-auto gap-8">
@@ -15,12 +15,14 @@ export default function NotFound() {
           <div className="w-9 h-9 rounded-xl bg-foreground flex items-center justify-center shadow-sm group-hover:opacity-80 transition-opacity">
             <Layers className="w-5 h-5 text-background" />
           </div>
-          <span className="font-semibold text-foreground text-lg">WebCraft</span>
+          <span className="font-semibold text-foreground text-lg">
+            WebCraft
+          </span>
         </Link>
 
         {/* 404 number + heading */}
         <div className="space-y-4">
-          <p className="text-[9rem] leading-none font-black tracking-tighter text-foreground/[0.06] select-none">
+          <p className="text-[9rem] leading-none font-black tracking-tighter text-foreground/[0.06] dark:text-foreground/[0.15] select-none">
             404
           </p>
           <div className="-mt-6 space-y-3">
@@ -28,8 +30,8 @@ export default function NotFound() {
               Page not found
             </h1>
             <p className="text-muted-foreground leading-relaxed max-w-sm mx-auto">
-              Looks like this page took a wrong turn. The URL might be
-              mistyped, or the page may have moved or been deleted.
+              Looks like this page took a wrong turn. The URL might be mistyped,
+              or the page may have moved or been deleted.
             </p>
           </div>
         </div>
