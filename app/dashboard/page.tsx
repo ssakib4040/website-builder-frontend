@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { useEditorStore } from "@/lib/builder/store";
+import { useSitesStore } from "@/lib/sites-store";
 import { Button } from "@/components/ui/button";
 import {
   FileText,
@@ -28,7 +29,11 @@ type DeployStatus = "draft" | "deploying" | "live";
 
 export default function DashboardPage() {
   const { pages, collections, endpoints, workflows } = useEditorStore();
-  const [deployStatus, setDeployStatus] = useState<DeployStatus>("draft");
+  const { sites, currentSiteId } = useSitesStore();
+  const currentSite = sites.find((s) => s.id === currentSiteId) ?? sites[0];
+  const [deployStatus, setDeployStatus] = useState<DeployStatus>(
+    currentSite?.status === "live" ? "live" : "draft",
+  );
 
   const userPages = pages.filter((p) => !p.isSystem);
 
@@ -156,8 +161,10 @@ export default function DashboardPage() {
             </span>
           </div>
           <p className="text-sm text-muted-foreground mt-0.5">
-            My Website ·{" "}
-            <span className="font-mono text-xs">mywebsite.webcraft.app</span>
+            {currentSite?.name ?? "Untitled Site"} ·{" "}
+            <span className="font-mono text-xs">
+              {currentSite?.customDomain ?? currentSite?.subdomain ?? ""}
+            </span>
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -409,7 +416,7 @@ export default function DashboardPage() {
                   <div className="flex items-center gap-2">
                     <Globe className="w-4 h-4 text-muted-foreground shrink-0" />
                     <span className="text-sm font-mono text-foreground flex-1 truncate">
-                      mywebsite.webcraft.app
+                      {currentSite?.customDomain ?? currentSite?.subdomain ?? ""}
                     </span>
                     <span
                       className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full uppercase tracking-wide ${

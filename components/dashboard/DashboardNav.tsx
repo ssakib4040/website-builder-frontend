@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   FileText,
   Database,
@@ -24,10 +24,16 @@ import {
   Settings,
   Menu,
   X,
+  ChevronsUpDown,
+  Check,
+  Plus,
+  LayoutGrid,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useSitesStore } from "@/lib/sites-store";
 
 const mainItems = [
+  { href: "/dashboard/sites", icon: LayoutGrid, label: "All Sites" },
   { href: "/dashboard", icon: LayoutDashboard, label: "Overview" },
 ];
 
@@ -102,6 +108,103 @@ function SectionLabel({ label }: { label: string }) {
   );
 }
 
+function SiteSwitcher({ onNavigate }: { onNavigate?: () => void }) {
+  const { sites, currentSiteId, setCurrentSite } = useSitesStore();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const current = sites.find((s) => s.id === currentSiteId) ?? sites[0];
+
+  // Close on outside click
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((p) => !p)}
+        className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg border border-border hover:bg-accent/60 transition-colors text-left"
+      >
+        <div
+          className={`w-6 h-6 rounded-md shrink-0 bg-linear-to-br ${current?.gradient ?? "from-neutral-500 to-stone-600"} flex items-center justify-center`}
+        >
+          <Layers className="w-3 h-3 text-white/70" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-semibold text-foreground truncate leading-tight">
+            {current?.name ?? "Select site"}
+          </p>
+          <p className="text-[10px] text-muted-foreground truncate leading-tight mt-0.5">
+            {current?.subdomain ?? ""}
+          </p>
+        </div>
+        <ChevronsUpDown className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+      </button>
+
+      {open && (
+        <div className="absolute top-full left-0 right-0 mt-1.5 bg-background border border-border rounded-xl shadow-lg z-50 overflow-hidden">
+          <div className="p-1.5 space-y-0.5 max-h-56 overflow-y-auto">
+            {sites.map((site) => (
+              <button
+                key={site.id}
+                onClick={() => {
+                  setCurrentSite(site.id);
+                  setOpen(false);
+                  onNavigate?.();
+                }}
+                className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-left transition-colors ${
+                  site.id === currentSiteId
+                    ? "bg-accent"
+                    : "hover:bg-accent/60"
+                }`}
+              >
+                <div
+                  className={`w-5 h-5 rounded shrink-0 bg-linear-to-br ${site.gradient}`}
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-foreground truncate">
+                    {site.name}
+                  </p>
+                  <p className="text-[10px] text-muted-foreground truncate">
+                    {site.status}
+                  </p>
+                </div>
+                {site.id === currentSiteId && (
+                  <Check className="w-3 h-3 text-foreground shrink-0" />
+                )}
+              </button>
+            ))}
+          </div>
+          <div className="border-t border-border p-1.5 space-y-0.5">
+            <Link
+              href="/dashboard/sites"
+              onClick={() => { setOpen(false); onNavigate?.(); }}
+              className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors"
+            >
+              <LayoutGrid className="w-3.5 h-3.5" />
+              All Sites
+            </Link>
+            <Link
+              href="/dashboard/sites"
+              onClick={() => { setOpen(false); onNavigate?.(); }}
+              className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              New Site
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function NavContents({
   isActive,
   onNavigate,
@@ -111,21 +214,17 @@ function NavContents({
 }) {
   return (
     <>
-      {/* ── Brand ── */}
-      <div className="px-4 py-4 border-b border-border shrink-0">
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center shrink-0">
-            <Layers className="w-4 h-4 text-background" />
+      {/* ── Brand + Site Switcher ── */}
+      <div className="px-3 pt-3 pb-3 border-b border-border shrink-0 space-y-2.5">
+        <Link href="/" className="flex items-center gap-2 px-1">
+          <div className="w-6 h-6 rounded-md bg-foreground flex items-center justify-center shrink-0">
+            <Layers className="w-3.5 h-3.5 text-background" />
           </div>
-          <div className="leading-none">
-            <p className="text-sm font-semibold text-foreground tracking-tight">
-              WebCraft
-            </p>
-            <p className="text-[10px] text-muted-foreground mt-0.5">
-              No-code builder
-            </p>
-          </div>
+          <span className="text-sm font-semibold text-foreground tracking-tight">
+            WebCraft
+          </span>
         </Link>
+        <SiteSwitcher onNavigate={onNavigate} />
       </div>
 
       {/* ── Navigation ── */}
@@ -226,6 +325,8 @@ function NavContents({
 export function DashboardNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { sites, currentSiteId } = useSitesStore();
+  const currentSite = sites.find((s) => s.id === currentSiteId) ?? sites[0];
 
   // Close drawer on route change
   useEffect(() => {
@@ -241,8 +342,8 @@ export function DashboardNav() {
   }, [open]);
 
   const isActive = (href: string) =>
-    href === "/dashboard"
-      ? pathname === "/dashboard"
+    href === "/dashboard" || href === "/dashboard/sites"
+      ? pathname === href
       : pathname.startsWith(href);
 
   return (
@@ -258,9 +359,14 @@ export function DashboardNav() {
           <div className="w-6 h-6 rounded-md bg-foreground flex items-center justify-center shrink-0">
             <Layers className="w-3.5 h-3.5 text-background" />
           </div>
-          <span className="text-sm font-semibold text-foreground tracking-tight">
-            WebCraft
-          </span>
+          <div className="min-w-0">
+            <span className="text-sm font-semibold text-foreground tracking-tight">WebCraft</span>
+            {currentSite && (
+              <span className="text-xs text-muted-foreground ml-1.5 hidden sm:inline">
+                / {currentSite.name}
+              </span>
+            )}
+          </div>
         </Link>
         <button
           onClick={() => setOpen(true)}

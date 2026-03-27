@@ -655,7 +655,7 @@ export default function SettingsPage() {
                   </h3>
                   <div className="flex items-center justify-between p-4 rounded-lg border border-border bg-background">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-7 rounded bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                      <div className="w-10 h-7 rounded bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                         <CreditCard className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -890,7 +890,7 @@ export default function SettingsPage() {
                   </div>
                   <div className="border-t border-destructive/20 px-5 py-4 flex items-start justify-between gap-6">
                     <div>
-                      <p className="text-sm font-semibold text-destructive font-semibold">
+                      <p className="text-sm font-semibold text-destructive">
                         Delete Site
                       </p>
                       <p className="text-sm text-muted-foreground mt-0.5">
