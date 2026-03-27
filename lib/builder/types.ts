@@ -34,11 +34,21 @@ export interface BuilderNode {
 export type ViewportMode = "desktop" | "tablet" | "mobile";
 
 // ── Pages ──────────────────────────────────────────────
+export type PageCategory =
+  | "marketing"
+  | "auth"
+  | "blog"
+  | "legal"
+  | "email"
+  | "error"
+  | "other";
+
 export interface AppPage {
   id: string;
   name: string;
   route: string;
   isSystem: boolean; // 404, 500 etc
+  category: PageCategory;
   nodes: BuilderNode[];
 }
 

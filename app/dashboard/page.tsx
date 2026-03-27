@@ -33,18 +33,58 @@ export default function DashboardPage() {
   const userPages = pages.filter((p) => !p.isSystem);
 
   const stats = [
-    { label: "Pages", value: pages.length, icon: FileText, href: "/dashboard/pages" },
-    { label: "Collections", value: collections.length, icon: Database, href: "/dashboard/data" },
-    { label: "API Endpoints", value: endpoints.length, icon: Plug, href: "/dashboard/api" },
-    { label: "Workflows", value: workflows.length, icon: Workflow, href: "/dashboard/logic" },
+    {
+      label: "Pages",
+      value: pages.length,
+      icon: FileText,
+      href: "/dashboard/pages",
+    },
+    {
+      label: "Collections",
+      value: collections.length,
+      icon: Database,
+      href: "/dashboard/data",
+    },
+    {
+      label: "API Endpoints",
+      value: endpoints.length,
+      icon: Plug,
+      href: "/dashboard/api",
+    },
+    {
+      label: "Workflows",
+      value: workflows.length,
+      icon: Workflow,
+      href: "/dashboard/logic",
+    },
   ];
 
   const checklist = [
-    { label: "Create your first page", done: userPages.length > 0, href: "/dashboard/pages" },
-    { label: "Set up a data collection", done: collections.length > 0, href: "/dashboard/data" },
-    { label: "Define an API endpoint", done: endpoints.length > 0, href: "/dashboard/api" },
-    { label: "Build a workflow", done: workflows.length > 0, href: "/dashboard/logic" },
-    { label: "Publish your site", done: deployStatus === "live", href: undefined },
+    {
+      label: "Create your first page",
+      done: userPages.length > 0,
+      href: "/dashboard/pages",
+    },
+    {
+      label: "Set up a data collection",
+      done: collections.length > 0,
+      href: "/dashboard/data",
+    },
+    {
+      label: "Define an API endpoint",
+      done: endpoints.length > 0,
+      href: "/dashboard/api",
+    },
+    {
+      label: "Build a workflow",
+      done: workflows.length > 0,
+      href: "/dashboard/logic",
+    },
+    {
+      label: "Publish your site",
+      done: deployStatus === "live",
+      href: undefined,
+    },
   ];
   const checklistDone = checklist.filter((c) => c.done).length;
   const checklistPct = Math.round((checklistDone / checklist.length) * 100);
@@ -56,12 +96,42 @@ export default function DashboardPage() {
   }
 
   const quickActions = [
-    { label: "New Page", description: "Add a page to your site", icon: FileText, href: "/dashboard/pages" },
-    { label: "New Collection", description: "Create a data model", icon: Database, href: "/dashboard/data" },
-    { label: "New API Endpoint", description: "Define a REST endpoint", icon: Plug, href: "/dashboard/api" },
-    { label: "New Workflow", description: "Automate an action", icon: Workflow, href: "/dashboard/logic" },
-    { label: "Open Visual Builder", description: "Drag-and-drop editor", icon: Layers, href: "/builder" },
-    { label: "Preview Site", description: "See the live preview", icon: Eye, href: "/preview" },
+    {
+      label: "New Page",
+      description: "Add a page to your site",
+      icon: FileText,
+      href: "/dashboard/pages",
+    },
+    {
+      label: "New Collection",
+      description: "Create a data model",
+      icon: Database,
+      href: "/dashboard/data",
+    },
+    {
+      label: "New API Endpoint",
+      description: "Define a REST endpoint",
+      icon: Plug,
+      href: "/dashboard/api",
+    },
+    {
+      label: "New Workflow",
+      description: "Automate an action",
+      icon: Workflow,
+      href: "/dashboard/logic",
+    },
+    {
+      label: "Open Visual Builder",
+      description: "Drag-and-drop editor",
+      icon: Layers,
+      href: "/builder",
+    },
+    {
+      label: "Preview Site",
+      description: "See the live preview",
+      icon: Eye,
+      href: "/preview",
+    },
   ];
 
   return (
@@ -78,21 +148,36 @@ export default function DashboardPage() {
                   : "bg-accent text-muted-foreground"
               }`}
             >
-              {deployStatus === "live" ? "Live" : deployStatus === "deploying" ? "Deploying…" : "Draft"}
+              {deployStatus === "live"
+                ? "Live"
+                : deployStatus === "deploying"
+                  ? "Deploying…"
+                  : "Draft"}
             </span>
           </div>
           <p className="text-sm text-muted-foreground mt-0.5">
-            My Website · <span className="font-mono text-xs">mywebsite.webcraft.app</span>
+            My Website ·{" "}
+            <span className="font-mono text-xs">mywebsite.webcraft.app</span>
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="h-8 text-xs gap-1.5" asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8 text-xs gap-1.5"
+            asChild
+          >
             <Link href="/preview">
               <Eye className="w-3.5 h-3.5" />
               Preview
             </Link>
           </Button>
-          <Button variant="outline" size="sm" className="h-8 text-xs gap-1.5" asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8 text-xs gap-1.5"
+            asChild
+          >
             <Link href="/builder">
               <ExternalLink className="w-3.5 h-3.5" />
               Open Builder
@@ -105,14 +190,17 @@ export default function DashboardPage() {
             disabled={deployStatus === "deploying" || deployStatus === "live"}
           >
             <Rocket className="w-3.5 h-3.5" />
-            {deployStatus === "live" ? "Published" : deployStatus === "deploying" ? "Publishing…" : "Publish"}
+            {deployStatus === "live"
+              ? "Published"
+              : deployStatus === "deploying"
+                ? "Publishing…"
+                : "Publish"}
           </Button>
         </div>
       </div>
 
       <div className="flex-1 overflow-auto">
         <div className="p-6 space-y-6">
-
           {/* ── Stats ── */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {stats.map(({ label, value, icon: Icon, href }) => (
@@ -134,18 +222,22 @@ export default function DashboardPage() {
 
           {/* ── Two-column body ── */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-
             {/* LEFT col */}
             <div className="lg:col-span-3 space-y-4">
-
               {/* Getting Started */}
               <div className="rounded-xl border border-border bg-card overflow-hidden">
                 <div className="px-5 py-4 border-b border-border flex items-center justify-between">
                   <div>
-                    <h2 className="text-sm font-semibold text-foreground">Getting Started</h2>
-                    <p className="text-xs text-muted-foreground mt-0.5">{checklistDone} of {checklist.length} steps complete</p>
+                    <h2 className="text-sm font-semibold text-foreground">
+                      Getting Started
+                    </h2>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      {checklistDone} of {checklist.length} steps complete
+                    </p>
                   </div>
-                  <span className="text-xs font-semibold text-foreground">{checklistPct}%</span>
+                  <span className="text-xs font-semibold text-foreground">
+                    {checklistPct}%
+                  </span>
                 </div>
                 <div className="h-1 bg-accent">
                   <div
@@ -159,7 +251,9 @@ export default function DashboardPage() {
                       <li
                         key={label}
                         className={`flex items-center gap-3 px-5 py-3 text-sm transition-colors ${
-                          !done && href ? "hover:bg-accent/30 cursor-pointer" : ""
+                          !done && href
+                            ? "hover:bg-accent/30 cursor-pointer"
+                            : ""
                         }`}
                       >
                         {done ? (
@@ -167,7 +261,13 @@ export default function DashboardPage() {
                         ) : (
                           <Circle className="w-4 h-4 text-muted-foreground shrink-0" />
                         )}
-                        <span className={done ? "line-through text-muted-foreground" : "text-foreground"}>
+                        <span
+                          className={
+                            done
+                              ? "line-through text-muted-foreground"
+                              : "text-foreground"
+                          }
+                        >
                           {label}
                         </span>
                         {!done && href && (
@@ -176,7 +276,9 @@ export default function DashboardPage() {
                       </li>
                     );
                     return href && !done ? (
-                      <Link key={label} href={href} className="block">{row}</Link>
+                      <Link key={label} href={href} className="block">
+                        {row}
+                      </Link>
                     ) : (
                       row
                     );
@@ -187,8 +289,15 @@ export default function DashboardPage() {
               {/* Recent Pages */}
               <div className="rounded-xl border border-border bg-card overflow-hidden">
                 <div className="px-5 py-4 border-b border-border flex items-center justify-between">
-                  <h2 className="text-sm font-semibold text-foreground">Pages</h2>
-                  <Button variant="ghost" size="sm" className="h-7 text-xs gap-1 text-muted-foreground" asChild>
+                  <h2 className="text-sm font-semibold text-foreground">
+                    Pages
+                  </h2>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-xs gap-1 text-muted-foreground"
+                    asChild
+                  >
                     <Link href="/dashboard/pages">
                       <Plus className="w-3.5 h-3.5" />
                       New page
@@ -198,22 +307,32 @@ export default function DashboardPage() {
                 {pages.length === 0 ? (
                   <div className="px-5 py-8 text-center text-sm text-muted-foreground">
                     No pages yet.{" "}
-                    <Link href="/dashboard/pages" className="underline text-foreground">
+                    <Link
+                      href="/dashboard/pages"
+                      className="underline text-foreground"
+                    >
                       Create one
                     </Link>
                   </div>
                 ) : (
                   <ul className="divide-y divide-border">
                     {pages.map((page) => (
-                      <li key={page.id} className="flex items-center gap-3 px-5 py-3 group hover:bg-accent/30 transition-colors">
+                      <li
+                        key={page.id}
+                        className="flex items-center gap-3 px-5 py-3 group hover:bg-accent/30 transition-colors"
+                      >
                         {page.isSystem ? (
                           <Clock className="w-4 h-4 text-muted-foreground shrink-0" />
                         ) : (
                           <FileText className="w-4 h-4 text-muted-foreground shrink-0" />
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-foreground truncate">{page.name}</p>
-                          <p className="text-xs text-muted-foreground font-mono">{page.route}</p>
+                          <p className="text-sm font-medium text-foreground truncate">
+                            {page.name}
+                          </p>
+                          <p className="text-xs text-muted-foreground font-mono">
+                            {page.route}
+                          </p>
                         </div>
                         {page.isSystem && (
                           <span className="text-[10px] bg-accent text-muted-foreground px-1.5 py-0.5 rounded shrink-0">
@@ -245,37 +364,46 @@ export default function DashboardPage() {
 
             {/* RIGHT col */}
             <div className="lg:col-span-2 space-y-4">
-
               {/* Quick Actions */}
               <div className="rounded-xl border border-border bg-card overflow-hidden">
                 <div className="px-5 py-4 border-b border-border">
-                  <h2 className="text-sm font-semibold text-foreground">Quick Actions</h2>
+                  <h2 className="text-sm font-semibold text-foreground">
+                    Quick Actions
+                  </h2>
                 </div>
                 <ul className="divide-y divide-border">
-                  {quickActions.map(({ label, description, icon: Icon, href }) => (
-                    <li key={label}>
-                      <Link
-                        href={href}
-                        className="flex items-center gap-3 px-5 py-3 hover:bg-accent/30 transition-colors group"
-                      >
-                        <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                          <Icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-foreground">{label}</p>
-                          <p className="text-xs text-muted-foreground">{description}</p>
-                        </div>
-                        <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all shrink-0" />
-                      </Link>
-                    </li>
-                  ))}
+                  {quickActions.map(
+                    ({ label, description, icon: Icon, href }) => (
+                      <li key={label}>
+                        <Link
+                          href={href}
+                          className="flex items-center gap-3 px-5 py-3 hover:bg-accent/30 transition-colors group"
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center shrink-0">
+                            <Icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-foreground">
+                              {label}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {description}
+                            </p>
+                          </div>
+                          <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all shrink-0" />
+                        </Link>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
 
               {/* Publish */}
               <div className="rounded-xl border border-border bg-card overflow-hidden">
                 <div className="px-5 py-4 border-b border-border">
-                  <h2 className="text-sm font-semibold text-foreground">Deployment</h2>
+                  <h2 className="text-sm font-semibold text-foreground">
+                    Deployment
+                  </h2>
                 </div>
                 <div className="px-5 py-4 space-y-3">
                   <div className="flex items-center gap-2">
@@ -290,7 +418,11 @@ export default function DashboardPage() {
                           : "bg-accent text-muted-foreground"
                       }`}
                     >
-                      {deployStatus === "live" ? "Live" : deployStatus === "deploying" ? "Deploying" : "Draft"}
+                      {deployStatus === "live"
+                        ? "Live"
+                        : deployStatus === "deploying"
+                          ? "Deploying"
+                          : "Draft"}
                     </span>
                   </div>
                   {deployStatus === "live" && (
@@ -302,15 +434,17 @@ export default function DashboardPage() {
                     size="sm"
                     className="w-full h-8 text-xs gap-1.5"
                     onClick={handleDeploy}
-                    disabled={deployStatus === "deploying" || deployStatus === "live"}
+                    disabled={
+                      deployStatus === "deploying" || deployStatus === "live"
+                    }
                     variant={deployStatus === "live" ? "outline" : "default"}
                   >
                     <Rocket className="w-3.5 h-3.5" />
                     {deployStatus === "live"
                       ? "Published"
                       : deployStatus === "deploying"
-                      ? "Publishing…"
-                      : "Publish to Web"}
+                        ? "Publishing…"
+                        : "Publish to Web"}
                   </Button>
                 </div>
               </div>
@@ -318,19 +452,26 @@ export default function DashboardPage() {
               {/* Resources */}
               <div className="rounded-xl border border-border bg-card overflow-hidden">
                 <div className="px-5 py-4 border-b border-border">
-                  <h2 className="text-sm font-semibold text-foreground">Resources</h2>
+                  <h2 className="text-sm font-semibold text-foreground">
+                    Resources
+                  </h2>
                 </div>
                 <ul className="divide-y divide-border">
                   {[
                     { label: "Documentation", sub: "Guides and API reference" },
-                    { label: "Templates", sub: "Start from a pre-built design" },
+                    {
+                      label: "Templates",
+                      sub: "Start from a pre-built design",
+                    },
                     { label: "Community", sub: "Ask questions and share work" },
                     { label: "Changelog", sub: "Latest features and fixes" },
                   ].map(({ label, sub }) => (
                     <li key={label}>
                       <button className="w-full flex items-center gap-3 px-5 py-3 hover:bg-accent/30 transition-colors text-left group cursor-pointer">
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-foreground">{label}</p>
+                          <p className="text-sm font-medium text-foreground">
+                            {label}
+                          </p>
                           <p className="text-xs text-muted-foreground">{sub}</p>
                         </div>
                         <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all shrink-0" />
@@ -339,7 +480,6 @@ export default function DashboardPage() {
                   ))}
                 </ul>
               </div>
-
             </div>
           </div>
         </div>
