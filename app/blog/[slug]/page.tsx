@@ -2,7 +2,6 @@ import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
-import { notFound } from "next/navigation";
 
 const posts: Record<
   string,
@@ -77,40 +76,46 @@ const posts: Record<
   },
 };
 
+type Post = {
+  category: string;
+  title: string;
+  author: string;
+  avatar: string;
+  date: string;
+  readTime: string;
+  excerpt: string;
+  content: { heading?: string; body: string }[];
+};
+
 // For slugs we don't have full content for, generate a generic post
-function getPost(slug: string) {
+function getPost(slug: string): Post {
   if (posts[slug]) return posts[slug];
-  const genericSlugs = [
-    "seo-checklist-for-new-websites",
-    "responsive-design-principles",
-    "why-page-speed-matters",
-    "june-product-update",
-  ];
-  if (genericSlugs.includes(slug)) {
-    return {
-      category: "Article",
-      title: slug
-        .split("-")
-        .map((w) => w[0].toUpperCase() + w.slice(1))
-        .join(" "),
-      author: "WebCraft Team",
-      avatar: "WC",
-      date: "May 2025",
-      readTime: "5 min read",
-      excerpt: "A deep-dive article from the WebCraft blog.",
-      content: [
-        {
-          body: "This article is coming soon. Check back shortly for the full content. In the meantime, browse our other posts or sign up to get notified when new articles are published.",
-        },
-      ],
-    };
-  }
-  return null;
+  return {
+    category: "Article",
+    title: slug
+      .split("-")
+      .map((w) => w[0].toUpperCase() + w.slice(1))
+      .join(" "),
+    author: "WebCraft Team",
+    avatar: "WC",
+    date: "May 2025",
+    readTime: "5 min read",
+    excerpt: "A deep-dive article from the WebCraft blog.",
+    content: [
+      {
+        body: "This article is coming soon. Check back shortly for the full content. In the meantime, browse our other posts or sign up to get notified when new articles are published.",
+      },
+    ],
+  };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug);
-  if (!post) notFound();
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = getPost(slug);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
