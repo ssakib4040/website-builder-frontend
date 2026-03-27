@@ -45,7 +45,7 @@ export default function ResetPasswordPage() {
           <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center">
             <Layers className="w-4 h-4 text-background" />
           </div>
-          <span className="text-sm font-semibold text-foreground">
+          <span className="text-base font-semibold text-foreground">
             WebCraft
           </span>
         </Link>
@@ -60,10 +60,10 @@ export default function ResetPasswordPage() {
                 <CheckCircle className="w-12 h-12 text-green-500" />
               </div>
               <div className="space-y-1">
-                <h1 className="text-xl font-semibold text-foreground">
+                <h1 className="text-2xl font-bold text-foreground">
                   Password updated
                 </h1>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   Your password has been changed successfully.
                 </p>
               </div>
@@ -74,17 +74,17 @@ export default function ResetPasswordPage() {
           ) : (
             <>
               <div className="space-y-1 text-center">
-                <h1 className="text-xl font-semibold text-foreground">
+                <h1 className="text-2xl font-bold text-foreground">
                   Set new password
                 </h1>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   Choose a strong password for your account.
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-foreground">
+                  <label className="text-sm font-medium text-foreground">
                     New password
                   </label>
                   <div className="relative">
@@ -110,7 +110,7 @@ export default function ResetPasswordPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-foreground">
+                  <label className="text-sm font-medium text-foreground">
                     Confirm password
                   </label>
                   <div className="relative">
@@ -135,7 +135,7 @@ export default function ResetPasswordPage() {
                   </div>
                 </div>
 
-                {error && <p className="text-xs text-red-500">{error}</p>}
+                {error && <p className="text-sm text-red-500">{error}</p>}
 
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Updating…" : "Update password"}

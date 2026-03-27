@@ -140,7 +140,7 @@ export default function PricingPage() {
                     </span>
                   </div>
                   <p
-                    className={`text-sm ${plan.highlight ? "text-background/80" : "text-muted-foreground"}`}
+                    className={`text-base ${plan.highlight ? "text-background/80" : "text-muted-foreground"}`}
                   >
                     {plan.description}
                   </p>
@@ -160,7 +160,10 @@ export default function PricingPage() {
 
                 <ul className="space-y-2.5 flex-1">
                   {plan.features.map(({ label, included }) => (
-                    <li key={label} className="flex items-center gap-2 text-sm">
+                    <li
+                      key={label}
+                      className="flex items-center gap-2 text-base"
+                    >
                       {included ? (
                         <Check
                           className={`w-4 h-4 shrink-0 ${plan.highlight ? "text-background" : "text-foreground"}`}
@@ -199,7 +202,7 @@ export default function PricingPage() {
               {faqs.map(({ q, a }) => (
                 <div key={q} className="space-y-2">
                   <h3 className="font-semibold text-foreground text-sm">{q}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     {a}
                   </p>
                 </div>
@@ -213,7 +216,7 @@ export default function PricingPage() {
           <h2 className="text-2xl font-bold text-foreground">
             Still have questions?
           </h2>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-base">
             Our team usually replies within a few hours.
           </p>
           <Link

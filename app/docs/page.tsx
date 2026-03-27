@@ -208,7 +208,7 @@ export default function DocsPage() {
             <h3 className="font-semibold text-foreground">
               Can&apos;t find what you need?
             </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Our support team is available Monday–Friday, 9am–5pm PST. We
               usually reply within a few hours.
             </p>
@@ -221,7 +221,7 @@ export default function DocsPage() {
           </div>
           <div className="rounded-xl border border-border bg-card/40 p-6 space-y-3">
             <h3 className="font-semibold text-foreground">Community forum</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Ask questions, share projects, and get tips from 24,000+ WebCraft
               users.
             </p>

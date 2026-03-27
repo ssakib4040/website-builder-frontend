@@ -361,7 +361,7 @@ export default function Home() {
                   <h3 className="text-sm font-semibold text-foreground mb-1.5">
                     {title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     {desc}
                   </p>
                 </div>
@@ -403,7 +403,7 @@ export default function Home() {
                 <h3 className="text-sm font-semibold text-foreground mt-2 mb-1.5">
                   {title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   {desc}
                 </p>
                 {i < steps.length - 1 && (
@@ -429,7 +429,7 @@ export default function Home() {
                 key={name}
                 className="p-6 rounded-xl border border-border bg-card flex flex-col gap-4"
               >
-                <p className="text-sm text-foreground leading-relaxed flex-1">
+                <p className="text-base text-foreground leading-relaxed flex-1">
                   &ldquo;{quote}&rdquo;
                 </p>
                 <div>
@@ -508,7 +508,7 @@ export default function Home() {
 
                   <ul className="space-y-2 flex-1">
                     {planFeatures.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm">
+                      <li key={f} className="flex items-center gap-2 text-base">
                         <CheckCircle2
                           className={`w-3.5 h-3.5 shrink-0 ${highlighted ? "text-background/80" : "text-emerald-500"}`}
                         />

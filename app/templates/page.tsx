@@ -281,7 +281,7 @@ export default function TemplatesPage() {
             <h2 className="text-2xl font-bold text-foreground">
               Don&apos;t see what you need?
             </h2>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-base">
               Start with a blank canvas and build exactly what you have in mind.
             </p>
             <Link

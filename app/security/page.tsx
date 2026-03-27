@@ -107,7 +107,7 @@ export default function SecurityPage() {
                   <Icon className="w-5 h-5 text-foreground" />
                 </div>
                 <h3 className="font-semibold text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   {body}
                 </p>
               </div>
@@ -121,7 +121,7 @@ export default function SecurityPage() {
             <h2 className="text-xl font-bold text-foreground">
               Penetration testing
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
+            <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
               We conduct annual penetration tests with a third-party security
               firm. Internal red team exercises run quarterly. Findings are
               triaged and tracked to resolution through our security issue
@@ -136,11 +136,11 @@ export default function SecurityPage() {
           <h2 className="text-xl font-bold text-foreground">
             Responsible disclosure
           </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
+          <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
             We welcome security researchers to help us identify vulnerabilities.
             If you discover a potential issue:
           </p>
-          <ol className="space-y-2 text-sm text-muted-foreground list-decimal list-inside max-w-2xl">
+          <ol className="space-y-2 text-base text-muted-foreground list-decimal list-inside max-w-2xl">
             <li>
               Email a description to{" "}
               <a
@@ -156,7 +156,7 @@ export default function SecurityPage() {
               disclosure
             </li>
           </ol>
-          <p className="text-sm text-muted-foreground max-w-2xl">
+          <p className="text-base text-muted-foreground max-w-2xl">
             We acknowledge reports within 24 hours. Critical vulnerabilities are
             patched within 72 hours. We do not take legal action against
             researchers who act in good faith.
@@ -170,7 +170,7 @@ export default function SecurityPage() {
               <h2 className="text-lg font-bold text-foreground">
                 Security questions?
               </h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-base text-muted-foreground">
                 Enterprise customers can request the full SOC 2 report and
                 detailed security questionnaire responses.
               </p>

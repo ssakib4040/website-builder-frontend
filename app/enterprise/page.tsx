@@ -135,7 +135,7 @@ export default function EnterprisePage() {
                 <div className="w-5 h-5 rounded-full bg-foreground flex items-center justify-center shrink-0">
                   <Check className="w-3 h-3 text-background" />
                 </div>
-                <span className="text-sm text-foreground">{item}</span>
+                <span className="text-base text-foreground">{item}</span>
               </div>
             ))}
             <div className="pt-2 border-t border-border">
@@ -172,7 +172,7 @@ export default function EnterprisePage() {
             <h2 className="text-2xl font-bold text-foreground">
               Built for the demands of enterprise
             </h2>
-            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
+            <p className="text-muted-foreground text-base max-w-xl mx-auto">
               Security, compliance, and scalability — without sacrificing the
               ease of use your team expects.
             </p>
@@ -184,7 +184,7 @@ export default function EnterprisePage() {
                   <Icon className="w-5 h-5 text-foreground" />
                 </div>
                 <h3 className="font-semibold text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   {body}
                 </p>
               </div>
@@ -205,7 +205,7 @@ export default function EnterprisePage() {
                   className="space-y-2 pb-6 border-b border-border last:border-0 last:pb-0"
                 >
                   <h3 className="text-sm font-semibold text-foreground">{q}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     {a}
                   </p>
                 </div>
@@ -217,7 +217,7 @@ export default function EnterprisePage() {
         {/* CTA */}
         <section className="max-w-4xl mx-auto px-6 py-20 text-center space-y-5">
           <h2 className="text-2xl font-bold text-foreground">Ready to talk?</h2>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-base">
             Our sales team will get back to you within one business day.
           </p>
           <Link

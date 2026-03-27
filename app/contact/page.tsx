@@ -63,7 +63,7 @@ export default function ContactPage() {
                     <p className="text-sm font-medium text-foreground">
                       Email us
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-base text-muted-foreground">
                       hello@webcraft.io
                     </p>
                     <p className="text-xs text-muted-foreground">
@@ -79,7 +79,7 @@ export default function ContactPage() {
                     <p className="text-sm font-medium text-foreground">
                       Live chat
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-base text-muted-foreground">
                       Available Monday–Friday
                     </p>
                     <p className="text-xs text-muted-foreground">
@@ -95,7 +95,7 @@ export default function ContactPage() {
                     <p className="text-sm font-medium text-foreground">
                       Office
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-base text-muted-foreground">
                       340 Pine St, Suite 800
                     </p>
                     <p className="text-xs text-muted-foreground">
@@ -133,13 +133,13 @@ export default function ContactPage() {
                   <h2 className="text-xl font-semibold text-foreground">
                     Message sent!
                   </h2>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-base text-muted-foreground">
                     Thanks, {name.split(" ")[0]}. We&apos;ll get back to you at{" "}
                     <strong>{email}</strong> shortly.
                   </p>
                 </div>
                 <button
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+                  className="text-base text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
                   onClick={() => {
                     setSent(false);
                     setName("");

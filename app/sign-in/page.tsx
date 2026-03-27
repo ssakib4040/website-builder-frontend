@@ -35,7 +35,7 @@ export default function SignInPage() {
           <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center">
             <Layers className="w-4 h-4 text-background" />
           </div>
-          <span className="text-sm font-semibold text-foreground">
+          <span className="text-base font-semibold text-foreground">
             WebCraft
           </span>
         </Link>
@@ -45,17 +45,15 @@ export default function SignInPage() {
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm space-y-6">
           <div className="space-y-1 text-center">
-            <h1 className="text-xl font-semibold text-foreground">
-              Welcome back
-            </h1>
-            <p className="text-sm text-muted-foreground">
+            <h1 className="text-2xl font-bold text-foreground">Welcome back</h1>
+            <p className="text-base text-muted-foreground">
               Sign in to your WebCraft account
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-3">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-foreground">
+              <label className="text-sm font-medium text-foreground">
                 Email address
               </label>
               <Input
@@ -69,12 +67,12 @@ export default function SignInPage() {
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-medium text-foreground">
+                <label className="text-sm font-medium text-foreground">
                   Password
                 </label>
                 <Link
                   href="/forgot-password"
-                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -102,7 +100,7 @@ export default function SignInPage() {
               </div>
             </div>
 
-            {error && <p className="text-xs text-red-500">{error}</p>}
+            {error && <p className="text-sm text-red-500">{error}</p>}
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Signing in…" : "Sign in"}
@@ -153,7 +151,7 @@ export default function SignInPage() {
             Continue with Google
           </Button>
 
-          <p className="text-center text-xs text-muted-foreground">
+          <p className="text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link
               href="/sign-up"

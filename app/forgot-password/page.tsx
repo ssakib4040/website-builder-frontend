@@ -34,7 +34,7 @@ export default function ForgotPasswordPage() {
           <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center">
             <Layers className="w-4 h-4 text-background" />
           </div>
-          <span className="text-sm font-semibold text-foreground">
+          <span className="text-base font-semibold text-foreground">
             WebCraft
           </span>
         </Link>
@@ -49,15 +49,15 @@ export default function ForgotPasswordPage() {
                 <CheckCircle className="w-12 h-12 text-green-500" />
               </div>
               <div className="space-y-1">
-                <h1 className="text-xl font-semibold text-foreground">
+                <h1 className="text-2xl font-bold text-foreground">
                   Check your inbox
                 </h1>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   We sent a password reset link to{" "}
                   <strong className="text-foreground">{email}</strong>.
                 </p>
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Didn&apos;t receive it? Check your spam folder or{" "}
                 <button
                   className="text-foreground hover:underline"
@@ -77,17 +77,17 @@ export default function ForgotPasswordPage() {
           ) : (
             <>
               <div className="space-y-1 text-center">
-                <h1 className="text-xl font-semibold text-foreground">
+                <h1 className="text-2xl font-bold text-foreground">
                   Reset your password
                 </h1>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   Enter your email and we&apos;ll send you a reset link.
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-foreground">
+                  <label className="text-sm font-medium text-foreground">
                     Email address
                   </label>
                   <Input
@@ -99,14 +99,14 @@ export default function ForgotPasswordPage() {
                   />
                 </div>
 
-                {error && <p className="text-xs text-red-500">{error}</p>}
+                {error && <p className="text-sm text-red-500">{error}</p>}
 
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Sending…" : "Send reset link"}
                 </Button>
               </form>
 
-              <p className="text-center text-xs text-muted-foreground">
+              <p className="text-center text-sm text-muted-foreground">
                 Remember your password?{" "}
                 <Link
                   href="/sign-in"

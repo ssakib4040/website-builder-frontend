@@ -15,12 +15,12 @@ export function SiteNav() {
           <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center">
             <Layers className="w-4 h-4 text-background" />
           </div>
-          <span className="text-sm font-semibold text-foreground tracking-tight">
+          <span className="text-base font-semibold text-foreground tracking-tight">
             WebCraft
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
+        <nav className="hidden md:flex items-center gap-6 text-base text-muted-foreground">
           <Link
             href="/templates"
             className="hover:text-foreground transition-colors"
@@ -57,13 +57,13 @@ export function SiteNav() {
           <ThemeToggle />
           <Link
             href="/sign-in"
-            className="h-8 px-4 text-xs font-medium rounded-lg border border-border hover:bg-accent/60 transition-colors text-foreground flex items-center"
+            className="h-8 px-4 text-sm font-medium rounded-lg border border-border hover:bg-accent/60 transition-colors text-foreground flex items-center"
           >
             Sign in
           </Link>
           <Link
             href="/sign-up"
-            className="h-8 px-4 text-xs font-medium rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity flex items-center gap-1.5"
+            className="h-8 px-4 text-sm font-medium rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity flex items-center gap-1.5"
           >
             Get started
             <ArrowRight className="w-3.5 h-3.5" />

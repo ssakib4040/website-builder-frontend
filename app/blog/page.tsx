@@ -150,7 +150,7 @@ export default function BlogPage() {
               <h2 className="text-xl font-bold text-foreground group-hover:underline underline-offset-2">
                 {posts[0].title}
               </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {posts[0].excerpt}
               </p>
               <div className="flex items-center justify-between pt-2">

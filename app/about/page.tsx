@@ -108,7 +108,7 @@ export default function AboutPage() {
                   <Icon className="w-5 h-5 text-foreground" />
                 </div>
                 <h3 className="font-semibold text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   {body}
                 </p>
               </div>
@@ -138,7 +138,7 @@ export default function AboutPage() {
                       {name}
                     </p>
                     <p className="text-xs text-muted-foreground">{role}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-base text-muted-foreground leading-relaxed">
                       {bio}
                     </p>
                   </div>

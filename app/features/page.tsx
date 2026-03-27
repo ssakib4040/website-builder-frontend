@@ -125,7 +125,7 @@ export default function FeaturesPage() {
                   <h3 className="font-semibold text-foreground text-sm">
                     {title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     {body}
                   </p>
                 </div>
@@ -139,7 +139,7 @@ export default function FeaturesPage() {
           <h2 className="text-2xl font-bold text-foreground">
             Start with all features free
           </h2>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-base">
             No credit card. No time limit on the free plan.
           </p>
           <Link

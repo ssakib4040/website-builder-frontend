@@ -236,7 +236,7 @@ export default function ChangelogPage() {
                           >
                             {item.kind}
                           </span>
-                          <span className="text-sm text-muted-foreground leading-relaxed">
+                          <span className="text-base text-muted-foreground leading-relaxed">
                             {item.text}
                           </span>
                         </li>

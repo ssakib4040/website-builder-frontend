@@ -40,7 +40,7 @@ export default function SignUpPage() {
           <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center">
             <Layers className="w-4 h-4 text-background" />
           </div>
-          <span className="text-sm font-semibold text-foreground">
+          <span className="text-base font-semibold text-foreground">
             WebCraft
           </span>
         </Link>
@@ -50,10 +50,10 @@ export default function SignUpPage() {
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm space-y-6">
           <div className="space-y-1 text-center">
-            <h1 className="text-xl font-semibold text-foreground">
+            <h1 className="text-2xl font-bold text-foreground">
               Create your account
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-base text-muted-foreground">
               Start building for free — no credit card required
             </p>
           </div>
@@ -104,7 +104,7 @@ export default function SignUpPage() {
 
           <form onSubmit={handleSubmit} className="space-y-3">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-foreground">
+              <label className="text-sm font-medium text-foreground">
                 Full name
               </label>
               <Input
@@ -117,7 +117,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-foreground">
+              <label className="text-sm font-medium text-foreground">
                 Email address
               </label>
               <Input
@@ -130,7 +130,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-foreground">
+              <label className="text-sm font-medium text-foreground">
                 Password
               </label>
               <div className="relative">
@@ -156,14 +156,14 @@ export default function SignUpPage() {
               </div>
             </div>
 
-            {error && <p className="text-xs text-red-500">{error}</p>}
+            {error && <p className="text-sm text-red-500">{error}</p>}
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Creating account…" : "Create account"}
             </Button>
           </form>
 
-          <p className="text-center text-xs text-muted-foreground">
+          <p className="text-center text-sm text-muted-foreground">
             By creating an account you agree to our{" "}
             <Link href="/terms" className="text-foreground hover:underline">
               Terms
@@ -175,7 +175,7 @@ export default function SignUpPage() {
             .
           </p>
 
-          <p className="text-center text-xs text-muted-foreground">
+          <p className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link
               href="/sign-in"

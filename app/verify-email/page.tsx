@@ -34,7 +34,7 @@ export default function VerifyEmailPage() {
           <div className="w-7 h-7 rounded-lg bg-foreground flex items-center justify-center">
             <Layers className="w-4 h-4 text-background" />
           </div>
-          <span className="text-sm font-semibold text-foreground">
+          <span className="text-base font-semibold text-foreground">
             WebCraft
           </span>
         </Link>
@@ -49,10 +49,10 @@ export default function VerifyEmailPage() {
                 <CheckCircle className="w-12 h-12 text-green-500" />
               </div>
               <div className="space-y-1">
-                <h1 className="text-xl font-semibold text-foreground">
+                <h1 className="text-2xl font-bold text-foreground">
                   Email verified!
                 </h1>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   Your account is ready. Let&apos;s start building.
                 </p>
               </div>
@@ -69,10 +69,10 @@ export default function VerifyEmailPage() {
               </div>
 
               <div className="space-y-1">
-                <h1 className="text-xl font-semibold text-foreground">
+                <h1 className="text-2xl font-bold text-foreground">
                   Verify your email
                 </h1>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   We sent a confirmation link to your email address. Click it to
                   activate your account.
                 </p>
@@ -98,12 +98,12 @@ export default function VerifyEmailPage() {
               </div>
 
               {resent && (
-                <p className="text-xs text-green-600 dark:text-green-400">
+                <p className="text-sm text-green-600 dark:text-green-400">
                   Verification email resent. Check your inbox.
                 </p>
               )}
 
-              <p className="text-xs text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Wrong email?{" "}
                 <Link
                   href="/sign-up"
