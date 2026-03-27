@@ -1,26 +1,23 @@
-# Copilot Instructions for Website Builder (Frontend Only)
+# Copilot Instructions – Frontend Website Builder
 
-## Project Overview
-This project is a **frontend-only website builder** that allows users to visually create, edit, and preview web pages using drag-and-drop components.
+## Scope
+Frontend-only drag-and-drop website builder. No real backend.
 
-The goal is to generate clean, reusable UI components and maintain a scalable architecture.
+## Rules
+* Use React functional components + hooks
+* Write clean, modular, reusable code
+* Keep components small and simple
+* No typescript errors or warnings (npm run lint to check)
+* Add the required backend API in http.md with HTTP method, endpoint, request body, and response body example (It will help us later implement the backend and mock the API in the frontend)
 
+## Interactivity (MANDATORY)
+* No dead UI — everything must work
+* Buttons, links, inputs must trigger real behavior
+* Mock all APIs:
+  * Simulate loading, success, and errors
+* App must feel fully functional without a backend
 
-### General Rules
-- Always write **clean, readable, and modular code**
-- Prefer **functional components with hooks**
-- Avoid unnecessary complexity
-- Use meaningful variable and function names
-- Keep components small and reusable
+## UI
+* Follow Notion-style design (clean, minimal, consistent)
 
----
-
-### Component Design
-- Components must be:
-  - Reusable
-  - Configurable via props
-  - Stateless when possible
-- Separate:
-  - UI (presentation)
-  - Logic (hooks / state)
 
