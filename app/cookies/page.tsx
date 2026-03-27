@@ -192,7 +192,7 @@ export default function CookiesPage() {
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               We may update this Cookie Policy periodically. When we do, we will
-              revise the "Last updated" date. Continued use of the service
+              revise the &quot;Last updated&quot; date. Continued use of the service
               constitutes acceptance of the updated policy.
             </p>
           </section>
