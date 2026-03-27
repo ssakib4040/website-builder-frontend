@@ -45,7 +45,7 @@ export default function CookiesPage() {
             <h1 className="text-3xl font-bold tracking-tight text-foreground">
               Cookie Policy
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-base text-muted-foreground">
               Last updated: {updated}
             </p>
             <p className="text-base text-muted-foreground leading-relaxed">
@@ -192,8 +192,8 @@ export default function CookiesPage() {
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed">
               We may update this Cookie Policy periodically. When we do, we will
-              revise the &quot;Last updated&quot; date. Continued use of the service
-              constitutes acceptance of the updated policy.
+              revise the &quot;Last updated&quot; date. Continued use of the
+              service constitutes acceptance of the updated policy.
             </p>
           </section>
 
