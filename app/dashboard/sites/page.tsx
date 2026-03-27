@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
-import { useSitesStore, type Site, type SiteStatus } from "@/lib/sites-store";
+import { useSitesStore, type Site, type SiteStatus, PLAN_LIMITS } from "@/lib/sites-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +27,8 @@ import {
   Layers,
   CheckCircle2,
   Clock,
+  Cpu,
+  MemoryStick,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -268,7 +270,65 @@ export default function SitesPage() {
                       </span>
                     </div>
 
-                    {/* Actions */}
+                    {/* Mini resource bars */}
+                    <div className="space-y-1.5 mb-3">
+                      {(() => {
+                        const limits = PLAN_LIMITS[site.plan];
+                        const cpuPct = site.cpuUsage;
+                        const ramPct = Math.round(
+                          (site.ramUsedMB / limits.ramMB) * 100,
+                        );
+                        function barColor(p: number) {
+                          if (p >= 90) return "bg-red-500";
+                          if (p >= 70) return "bg-orange-500";
+                          return "bg-foreground/50";
+                        }
+                        return (
+                          <>
+                            <div className="flex items-center gap-2">
+                              <Cpu className="w-3 h-3 text-muted-foreground shrink-0" />
+                              <div className="flex-1 h-1 rounded-full bg-accent overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full ${barColor(cpuPct)}`}
+                                  style={{ width: `${Math.min(cpuPct, 100)}%` }}
+                                />
+                              </div>
+                              <span
+                                className={`text-[10px] w-7 text-right font-medium ${
+                                  cpuPct >= 90
+                                    ? "text-red-500"
+                                    : cpuPct >= 70
+                                      ? "text-orange-500"
+                                      : "text-muted-foreground"
+                                }`}
+                              >
+                                {cpuPct}%
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <MemoryStick className="w-3 h-3 text-muted-foreground shrink-0" />
+                              <div className="flex-1 h-1 rounded-full bg-accent overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full ${barColor(ramPct)}`}
+                                  style={{ width: `${Math.min(ramPct, 100)}%` }}
+                                />
+                              </div>
+                              <span
+                                className={`text-[10px] w-7 text-right font-medium ${
+                                  ramPct >= 90
+                                    ? "text-red-500"
+                                    : ramPct >= 70
+                                      ? "text-orange-500"
+                                      : "text-muted-foreground"
+                                }`}
+                              >
+                                {ramPct}%
+                              </span>
+                            </div>
+                          </>
+                        );
+                      })()}
+                    </div>
                     <div className="flex items-center gap-1.5">
                       <Button
                         size="sm"

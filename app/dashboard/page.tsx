@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { useEditorStore } from "@/lib/builder/store";
-import { useSitesStore } from "@/lib/sites-store";
+import { useSitesStore, PLAN_LIMITS } from "@/lib/sites-store";
 import { Button } from "@/components/ui/button";
 import {
   FileText,
@@ -22,6 +22,13 @@ import {
   Layers,
   Clock,
   ArrowRight,
+  Cpu,
+  MemoryStick,
+  Wifi,
+  HardDrive,
+  MousePointerClick,
+  TrendingUp,
+  Zap,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -458,36 +465,168 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Resources */}
+              {/* Resource Usage */}
               <div className="rounded-xl border border-border bg-card overflow-hidden">
-                <div className="px-5 py-4 border-b border-border">
-                  <h2 className="text-sm font-semibold text-foreground">
-                    Resources
-                  </h2>
+                <div className="px-5 py-4 border-b border-border flex items-center justify-between">
+                  <div>
+                    <h2 className="text-sm font-semibold text-foreground">
+                      Resource Usage
+                    </h2>
+                    <p className="text-xs text-muted-foreground mt-0.5 capitalize">
+                      {currentSite?.plan ?? "hobby"} plan
+                    </p>
+                  </div>
+                  {currentSite && currentSite.plan !== "team" && (
+                    <button className="text-xs font-medium text-foreground bg-accent hover:bg-accent/80 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1">
+                      <Zap className="w-3 h-3" />
+                      Upgrade
+                    </button>
+                  )}
                 </div>
-                <ul className="divide-y divide-border">
-                  {[
-                    { label: "Documentation", sub: "Guides and API reference" },
-                    {
-                      label: "Templates",
-                      sub: "Start from a pre-built design",
-                    },
-                    { label: "Community", sub: "Ask questions and share work" },
-                    { label: "Changelog", sub: "Latest features and fixes" },
-                  ].map(({ label, sub }) => (
-                    <li key={label}>
-                      <button className="w-full flex items-center gap-3 px-5 py-3 hover:bg-accent/30 transition-colors text-left group cursor-pointer">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-foreground">
-                            {label}
-                          </p>
-                          <p className="text-xs text-muted-foreground">{sub}</p>
+                <div className="px-5 py-4 space-y-4">
+                  {(() => {
+                    const plan = currentSite?.plan ?? "hobby";
+                    const limits = PLAN_LIMITS[plan];
+                    const cpu = currentSite?.cpuUsage ?? 0;
+                    const ram = currentSite?.ramUsedMB ?? 0;
+                    const bw = currentSite?.bandwidthUsedGB ?? 0;
+                    const storage = currentSite?.storageUsedGB ?? 0;
+                    const reqs = currentSite?.requestsThisMonth ?? 0;
+
+                    function barColor(pct: number) {
+                      if (pct >= 90) return "bg-red-500";
+                      if (pct >= 70) return "bg-orange-500";
+                      return "bg-foreground";
+                    }
+                    function fmtRam(mb: number) {
+                      return mb >= 1024
+                        ? `${(mb / 1024).toFixed(1)} GB`
+                        : `${mb} MB`;
+                    }
+                    function fmtReqs(n: number) {
+                      return n >= 1_000_000
+                        ? `${(n / 1_000_000).toFixed(1)}M`
+                        : n >= 1000
+                          ? `${(n / 1000).toFixed(0)}k`
+                          : String(n);
+                    }
+
+                    const rows = [
+                      {
+                        icon: Cpu,
+                        label: "CPU",
+                        pct: cpu,
+                        used: `${cpu}%`,
+                        total: `${limits.cpuVCores} vCPU`,
+                      },
+                      {
+                        icon: MemoryStick,
+                        label: "RAM",
+                        pct: Math.round((ram / limits.ramMB) * 100),
+                        used: fmtRam(ram),
+                        total: fmtRam(limits.ramMB),
+                      },
+                      {
+                        icon: Wifi,
+                        label: "Bandwidth",
+                        pct: Math.round((bw / limits.bandwidthGB) * 100),
+                        used: `${bw} GB`,
+                        total: `${limits.bandwidthGB} GB`,
+                      },
+                      {
+                        icon: HardDrive,
+                        label: "Storage",
+                        pct: Math.round((storage / limits.storageGB) * 100),
+                        used: `${storage} GB`,
+                        total: `${limits.storageGB} GB`,
+                      },
+                    ];
+
+                    const reqPct = Math.round(
+                      (reqs / limits.requestsPerMonth) * 100,
+                    );
+
+                    return (
+                      <>
+                        {rows.map(({ icon: Icon, label, pct, used, total }) => (
+                          <div key={label}>
+                            <div className="flex items-center justify-between mb-1.5">
+                              <div className="flex items-center gap-1.5">
+                                <Icon className="w-3.5 h-3.5 text-muted-foreground" />
+                                <span className="text-xs font-medium text-foreground">
+                                  {label}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-1.5">
+                                <span
+                                  className={`text-xs font-semibold ${
+                                    pct >= 90
+                                      ? "text-red-500"
+                                      : pct >= 70
+                                        ? "text-orange-500"
+                                        : "text-foreground"
+                                  }`}
+                                >
+                                  {used}
+                                </span>
+                                <span className="text-xs text-muted-foreground">
+                                  / {total}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="h-1.5 rounded-full bg-accent overflow-hidden">
+                              <div
+                                className={`h-full rounded-full transition-all duration-500 ${barColor(pct)}`}
+                                style={{ width: `${Math.min(pct, 100)}%` }}
+                              />
+                            </div>
+                          </div>
+                        ))}
+
+                        {/* Requests */}
+                        <div className="pt-1 border-t border-border flex items-center justify-between">
+                          <div className="flex items-center gap-1.5">
+                            <MousePointerClick className="w-3.5 h-3.5 text-muted-foreground" />
+                            <span className="text-xs font-medium text-foreground">
+                              Requests
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <span
+                              className={`text-xs font-semibold ${
+                                reqPct >= 90
+                                  ? "text-red-500"
+                                  : reqPct >= 70
+                                    ? "text-orange-500"
+                                    : "text-foreground"
+                              }`}
+                            >
+                              {fmtReqs(reqs)}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              / {fmtReqs(limits.requestsPerMonth)} mo
+                            </span>
+                          </div>
                         </div>
-                        <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all shrink-0" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+
+                        {/* Upgrade nudge */}
+                        {(cpu >= 70 || Math.round((ram / limits.ramMB) * 100) >= 70) && (
+                          <div className="rounded-lg bg-orange-500/10 border border-orange-500/20 px-3 py-2.5 flex items-start gap-2">
+                            <TrendingUp className="w-3.5 h-3.5 text-orange-500 mt-0.5 shrink-0" />
+                            <div>
+                              <p className="text-xs font-medium text-orange-500">
+                                High resource usage detected
+                              </p>
+                              <p className="text-xs text-muted-foreground mt-0.5">
+                                Upgrade your plan for more CPU and RAM headroom.
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
               </div>
             </div>
           </div>
